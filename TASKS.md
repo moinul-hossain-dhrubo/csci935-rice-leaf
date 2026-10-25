@@ -26,13 +26,13 @@ Work starts**Mon 26 Oct**Plan and links shared Sun 25
 
 <div style="border-color:var(--accent);background:var(--accent-soft)">
 
-Team submission**Sat 31 Oct**Everything finished and submitted
+Team submission**Thu 29 Oct**Everything finished and submitted
 
 </div>
 
 <div>
 
-Official deadline**Sun 1 Nov, 11:30pm**Sun 1 Nov is emergency buffer only
+Official deadline**Sun 1 Nov, 11:30pm**Fri 30 Oct to Sun 1 Nov is emergency buffer only
 
 </div>
 
@@ -196,7 +196,7 @@ We have to deliver two things in one zip file:
 
 ### Where files go
 
-**Shared Google Drive folder** `CSCI935 Group Project` (link posted in the group chat with this plan):
+**Everything goes in our private GitHub repository** (link and invite posted in the group chat with this plan). Accept the email invite from GitHub first. The repo already has these folders:
 
 | Folder              | What goes in it                                            | Who uses it                     |
 |---------------------|------------------------------------------------------------|---------------------------------|
@@ -207,7 +207,17 @@ We have to deliver two things in one zip file:
 | `docs/`             | Installation instructions, User Manual, clean-machine test | Sabir, Moinul, Akram            |
 | `report/`           | Report draft and reference list                            | Anika, Aziz, Moinul             |
 
-**GitHub repository** (link posted with this plan): code only. Akram submits `plots.py` there.
+#### How to upload a file (no Git knowledge needed)
+
+1.  Open the repo link in your browser and sign in to GitHub.
+2.  Click the folder your task names (for example `papers`).
+3.  Click **Add file** \> **Upload files**, then drag your file in.
+4.  In the box under "Commit changes", type what it is (for example *Paper 1 summary, Amit*).
+5.  Leave **Commit directly to the main branch** selected and click **Commit changes**.
+
+To update a file, upload it again with the same name. Never delete or rename other people's files. Do not upload the dataset; it is too large and is ignored by the repo.
+
+The report itself is written in one shared **Google Doc** that Anika sets up (link in the repo's README).
 
 </div>
 
@@ -215,28 +225,25 @@ We have to deliver two things in one zip file:
 
 ## 5. Calendar
 
-| Date             | Who                          | What is due                                                                           |
-|------------------|------------------------------|---------------------------------------------------------------------------------------|
-| Sun 25 Oct       | Moinul                       | Plan shared; Google Drive and GitHub links posted                                     |
-| Mon 26 Oct       | Anika                        | Report template; papers found and assigned                                            |
-| Mon 26 Oct       | Amit                         | A1 Sample images                                                                      |
-| Mon 26 Oct       | Moinul                       | Dataset inspection; baseline method running                                           |
-| Tue 27 Oct       | Anika                        | Section 3 Problem Description                                                         |
-| Tue 27 Oct       | Moinul                       | Main method running; first results shared for Akram                                   |
-| **Wed 28 Oct**   | **Amit, Akram, Sabir, Aziz** | **Paper summaries (200 words each)**                                                  |
-| Wed 28 Oct       | Sabir                        | S2 Installation instructions                                                          |
-| Wed 28 Oct       | Anika                        | Section 5 Method part                                                                 |
-| Wed 28 Oct       | Moinul                       | All experiments finished                                                              |
-| Thu 29 Oct       | Akram                        | K2 Figures script                                                                     |
-| Thu 29 Oct       | Aziz                         | Z2 Reference list                                                                     |
-| Thu 29 Oct       | Anika                        | Section 4 Related Work                                                                |
-| Thu 29 Oct       | Moinul                       | Implementation part; wrong-prediction list for Amit; User Manual ready for Akram      |
-| Fri 30 Oct, 12pm | Amit                         | A3 Failure-case review                                                                |
-| Fri 30 Oct       | Akram                        | K4 Clean-machine test; K3 Final figures (evening)                                     |
-| Fri 30 Oct       | Moinul                       | Section 6.1 and 6.2 draft; fix test issues                                            |
-| Sat 31 Oct       | Moinul, Anika                | Code freeze; Section 6 final and reviewed; Executive Summary, coversheet, final merge |
-| **Sat 31 Oct**   | **Moinul**                   | **Submit on Moodle**                                                                  |
-| Sun 1 Nov        |                              | **Emergency buffer. No planned work.**                                                |
+| Date                    | Who                          | What is due                                                                                                          |
+|-------------------------|------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Sun 25 Oct              | Moinul                       | Plan shared; GitHub repo link posted and everyone invited                                                            |
+| Mon 26 Oct, 12pm        | Anika                        | Papers found and assigned; report template                                                                           |
+| Mon 26 Oct              | Amit                         | A1 Sample images                                                                                                     |
+| Mon 26 Oct              | Moinul                       | Dataset inspection; baseline running; first results shared for Akram (evening)                                       |
+| Tue 27 Oct, 12pm        | Sabir                        | S2 Installation instructions                                                                                         |
+| **Tue 27 Oct**          | **Amit, Akram, Sabir, Aziz** | **Paper summaries (200 words each)**                                                                                 |
+| Tue 27 Oct              | Akram                        | K2 Figures script                                                                                                    |
+| Tue 27 Oct              | Anika                        | Section 3 Problem Description; Section 5 Method part                                                                 |
+| Tue 27 Oct              | Moinul                       | All experiments finished; implementation part; wrong-prediction list for Amit; User Manual ready for Akram (evening) |
+| Wed 28 Oct, 12pm        | Amit                         | A3 Failure-case review                                                                                               |
+| Wed 28 Oct, 12pm        | Aziz                         | Z2 Reference list                                                                                                    |
+| Wed 28 Oct              | Akram                        | K4 Clean-machine test (by 12pm); K3 Final figures (evening)                                                          |
+| Wed 28 Oct              | Anika                        | Section 4 Related Work                                                                                               |
+| Wed 28 Oct              | Moinul                       | Fix test issues; Section 6 complete                                                                                  |
+| Thu 29 Oct              | Moinul, Anika                | Code freeze; Section 6 reviewed; Executive Summary, coversheet, final merge                                          |
+| **Thu 29 Oct**          | **Moinul**                   | **Submit on Moodle**                                                                                                 |
+| Fri 30 Oct to Sun 1 Nov |                              | **Emergency buffer. No planned work.**                                                                               |
 
 </div>
 
@@ -247,16 +254,16 @@ We have to deliver two things in one zip file:
 | Member     | Task                         | Size limit               | Due                  |
 |------------|------------------------------|--------------------------|----------------------|
 | **Amit**   | A1 Sample images             | 10 images                | Mon 26 Oct           |
-|            | A2 Summary of Paper 1        | 200 words (0.5 page)     | Wed 28 Oct           |
-|            | A3 Failure-case review       | 6 images, 15 words each  | Fri 30 Oct, 12pm     |
-| **Akram**  | K1 Summary of Paper 2        | 200 words (0.5 page)     | Wed 28 Oct           |
-|            | K2 Figures script            | 3 figures, max 6 cm tall | Thu 29 Oct           |
-|            | K4 Clean-machine test        | Test log                 | Fri 30 Oct           |
-|            | K3 Final figures             | 3 figures, max 6 cm tall | Fri 30 Oct (evening) |
-| **Sabir**  | S1 Summary of Paper 3        | 200 words (0.5 page)     | Wed 28 Oct           |
-|            | S2 Installation instructions | 1 page                   | Wed 28 Oct           |
-| **Aziz**   | Z1 Summary of Paper 4        | 200 words (0.5 page)     | Wed 28 Oct           |
-|            | Z2 Reference list            | No limit                 | Thu 29 Oct           |
+|            | A2 Summary of Paper 1        | 200 words (0.5 page)     | Tue 27 Oct           |
+|            | A3 Failure-case review       | 6 images, 15 words each  | Wed 28 Oct, 12pm     |
+| **Akram**  | K1 Summary of Paper 2        | 200 words (0.5 page)     | Tue 27 Oct           |
+|            | K2 Figures script            | 3 figures, max 6 cm tall | Tue 27 Oct           |
+|            | K4 Clean-machine test        | Test log                 | Wed 28 Oct, 12pm     |
+|            | K3 Final figures             | 3 figures, max 6 cm tall | Wed 28 Oct (evening) |
+| **Sabir**  | S1 Summary of Paper 3        | 200 words (0.5 page)     | Tue 27 Oct           |
+|            | S2 Installation instructions | 1 page                   | Tue 27 Oct, 12pm     |
+| **Aziz**   | Z1 Summary of Paper 4        | 200 words (0.5 page)     | Tue 27 Oct           |
+|            | Z2 Reference list            | No limit                 | Wed 28 Oct, 12pm     |
 | **Anika**  | See Section 12               |                          |                      |
 | **Moinul** | See Section 13               |                          |                      |
 
@@ -268,7 +275,7 @@ We have to deliver two things in one zip file:
 
 <div class="meta">
 
-**Who**Amit = Paper 1 · Akram = Paper 2 · Sabir = Paper 3 · Aziz = Paper 4 **Due****Wed 28 Oct** **Size limit****200 words maximum** (half a page). One paragraph. No headings, no bullet points, no figures. **Input**Your paper PDF, which Anika puts in `papers/` by Mon 26 Oct **Hand in**`papers/paper<N>_summary_<yourname>.docx`, for example `papers/paper1_summary_amit.docx`
+**Who**Amit = Paper 1 · Akram = Paper 2 · Sabir = Paper 3 · Aziz = Paper 4 **Due****Tue 27 Oct** **Size limit****200 words maximum** (half a page). One paragraph. No headings, no bullet points, no figures. **Input**Your paper PDF, which Anika puts in `papers/` by Mon 26 Oct, 12pm **Hand in**`papers/paper<N>_summary_<yourname>.docx`, for example `papers/paper1_summary_amit.docx`
 
 </div>
 
@@ -278,7 +285,7 @@ Section 4 of the report must summarise at least 4 IEEE papers from 2022 or later
 
 <div class="box note">
 
-<span class="t">You do not search for papers</span> Anika finds them. By **Mon 26 Oct** she puts the PDFs in `papers/` as `paper1.pdf` to `paper4.pdf` and posts in the group chat who has which. Nothing to do before then.
+<span class="t">You do not search for papers</span> Anika finds them. By **Mon 26 Oct, 12pm** she puts the PDFs in `papers/` as `paper1.pdf` to `paper4.pdf` and posts in the group chat who has which. Nothing to do before then.
 
 </div>
 
@@ -340,7 +347,7 @@ I need to write a 200-word summary of the attached paper for Section 4 (Related 
 
 ## 8. Amit
 
-3 tasks · A1 Mon 26 · A2 Wed 28 · A3 Fri 30
+3 tasks · A1 Mon 26 · A2 Tue 27 · A3 Wed 28
 
 </div>
 
@@ -379,7 +386,7 @@ Section 3 shows one example of each disease on each background, in one figure th
 
 <div class="meta">
 
-**Due****Wed 28 Oct** **Size limit**200 words **Instructions**Follow **Section 7** exactly
+**Due****Tue 27 Oct** **Size limit**200 words **Instructions**Follow **Section 7** exactly
 
 </div>
 
@@ -391,7 +398,7 @@ Section 3 shows one example of each disease on each background, in one figure th
 
 <div class="meta">
 
-**Due****Fri 30 Oct, 12pm** **Size limit**6 images, one line of 15 words or fewer each, plus one pattern line of 25 words or fewer **Input**`wrong_predictions.csv` from Moinul on **Thu 29 Oct** (columns: file name, background, true disease, predicted disease) **Hand in**`figures/failures/`: 6 images + `failures.txt`
+**Due****Wed 28 Oct, 12pm** **Size limit**6 images, one line of 15 words or fewer each, plus one pattern line of 25 words or fewer **Input**`wrong_predictions.csv` from Moinul on **Tue 27 Oct (evening)** (columns: file name, background, true disease, predicted disease) **Hand in**`figures/failures/`: 6 images + `failures.txt`
 
 </div>
 
@@ -435,7 +442,7 @@ I am Amit. My tasks are in Section 8 of the attached plan (A1 to A3), and A2 fol
 
 ## 9. Akram
 
-4 tasks · K1 Wed 28 · K2 Thu 29 · K4 Fri 30 · K3 Fri 30
+4 tasks · K1 Tue 27 · K2 Tue 27 · K4 Wed 28 · K3 Wed 28
 
 </div>
 
@@ -445,7 +452,7 @@ I am Amit. My tasks are in Section 8 of the attached plan (A1 to A3), and A2 fol
 
 <div class="meta">
 
-**Due****Wed 28 Oct** **Size limit**200 words **Instructions**Follow **Section 7** exactly
+**Due****Tue 27 Oct** **Size limit**200 words **Instructions**Follow **Section 7** exactly
 
 </div>
 
@@ -457,7 +464,7 @@ I am Amit. My tasks are in Section 8 of the attached plan (A1 to A3), and A2 fol
 
 <div class="meta">
 
-**Due****Thu 29 Oct** **Size limit**3 figures, each 18 cm wide (full text width) and **at most 6 cm tall** **Input**First real results from Moinul in the GitHub repo's `results/` folder on **Tue 27 Oct**; Amit's 10 images in `figures/samples/` **Hand in**`plots.py` as a GitHub pull request, plus the 3 test PNGs posted in the group chat
+**Due****Tue 27 Oct** **Size limit**3 figures, each 18 cm wide (full text width) and **at most 6 cm tall** **Input**First real results from Moinul in the GitHub repo's `results/` folder on **Mon 26 Oct (evening)**; Amit's 10 images in `figures/samples/` **Hand in**`plots.py` as a GitHub pull request, plus the 3 test PNGs posted in the group chat
 
 </div>
 
@@ -482,7 +489,7 @@ Write `plots.py` using **matplotlib only** (plus numpy and the standard library)
 3.  `plot_failures(failures_dir, wrong_predictions_csv)` saves `failures.png`
     - ONE strip of 6 images: 3 white, then 3 field
     - Under each image: `true: X / pred: Y`
-    - Build and test it now with any 6 images; the real ones arrive Fri 30
+    - Build and test it now with any 6 images; the real ones arrive Wed 28
 
 #### Rules
 
@@ -505,7 +512,7 @@ Write `plots.py` using **matplotlib only** (plus numpy and the standard library)
 
 <div class="meta">
 
-**Due****Fri 30 Oct** **Input**`docs/user_manual.docx` from Moinul on **Thu 29 Oct** **Hand in**`docs/clean_machine_test.docx`
+**Due****Wed 28 Oct, 12pm** **Input**`docs/user_manual.docx` from Moinul on **Tue 27 Oct (evening)** **Hand in**`docs/clean_machine_test.docx`
 
 </div>
 
@@ -534,13 +541,13 @@ If the marker cannot run our code, our results count as not reproducible and we 
 
 <div class="meta">
 
-**Due****Fri 30 Oct (evening)** **Size limit**Same 3 figures, at most 6 cm tall each **Hand in**`results/figures/confusion.png`, `samples.png`, `failures.png`, posted in the group chat
+**Due****Wed 28 Oct (evening)** **Size limit**Same 3 figures, at most 6 cm tall each **Hand in**`results/figures/confusion.png`, `samples.png`, `failures.png`, posted in the group chat
 
 </div>
 
 #### Steps
 
-1.  Run `plots.py` on Moinul's full results (ready Wed 28) and Amit's failure images (ready Fri 30, 12pm).
+1.  Run `plots.py` on Moinul's full results (ready Tue 27) and Amit's failure images (ready Wed 28, 12pm).
 2.  Place each PNG in a Word page at 18 cm width and print it, or print to PDF at 100%.
 3.  Check: every label readable, nothing overlapping, nothing cut off, colour bar visible.
 
@@ -566,7 +573,7 @@ I am Akram. My tasks are in Section 9 of the attached plan (K1 to K4), and K1 fo
 
 ## 10. Sabir
 
-2 tasks · S1 Wed 28 · S2 Wed 28
+2 tasks · S1 Tue 27 · S2 Tue 27 (12pm)
 
 </div>
 
@@ -576,7 +583,7 @@ I am Akram. My tasks are in Section 9 of the attached plan (K1 to K4), and K1 fo
 
 <div class="meta">
 
-**Due****Wed 28 Oct** **Size limit**200 words **Instructions**Follow **Section 7** exactly
+**Due****Tue 27 Oct** **Size limit**200 words **Instructions**Follow **Section 7** exactly
 
 </div>
 
@@ -588,7 +595,7 @@ I am Akram. My tasks are in Section 9 of the attached plan (K1 to K4), and K1 fo
 
 <div class="meta">
 
-**Due****Wed 28 Oct** **Size limit****1 page** (the whole User Manual is limited to 2 pages; Moinul writes the other page) **Input**`requirements.txt` in the GitHub repo **Hand in**`docs/install_instructions.docx`
+**Due****Tue 27 Oct, 12pm** **Size limit****1 page** (the whole User Manual is limited to 2 pages; Moinul writes the other page) **Input**`requirements.txt` in the GitHub repo **Hand in**`docs/install_instructions.docx`
 
 </div>
 
@@ -639,7 +646,7 @@ I am Sabir. My tasks are in Section 10 of the attached plan (S1 and S2), and S1 
 
 ## 11. Aziz
 
-2 tasks · Z1 Wed 28 · Z2 Thu 29
+2 tasks · Z1 Tue 27 · Z2 Wed 28 (12pm)
 
 </div>
 
@@ -649,7 +656,7 @@ I am Sabir. My tasks are in Section 10 of the attached plan (S1 and S2), and S1 
 
 <div class="meta">
 
-**Due****Wed 28 Oct** **Size limit**200 words **Instructions**Follow **Section 7** exactly
+**Due****Tue 27 Oct** **Size limit**200 words **Instructions**Follow **Section 7** exactly
 
 </div>
 
@@ -661,7 +668,7 @@ I am Sabir. My tasks are in Section 10 of the attached plan (S1 and S2), and S1 
 
 <div class="meta">
 
-**Due****Thu 29 Oct** **Size limit**No limit **Input**The 4 paper PDFs in `papers/`, plus extra items Anika posts in the group chat (for example the dataset paper and the ResNet paper) **Hand in**`report/references.docx`
+**Due****Wed 28 Oct, 12pm** **Size limit**No limit **Input**The 4 paper PDFs in `papers/`, plus extra items Anika posts in the group chat (for example the dataset paper and the ResNet paper) **Hand in**`report/references.docx`
 
 </div>
 
@@ -717,15 +724,15 @@ Report sections 2 to 5, final report
 
 </div>
 
-| Due        | Task                                      | Size limit | Details                                                                                                                                                                                                                                         |
-|------------|-------------------------------------------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Mon 26 Oct | Report template                           | n/a        | Google Doc with all 8 section headings, **each section starting on a new page**, 12pt font, 1.25 cm margins, page numbers starting from 1 after the coversheet                                                                                  |
-| Mon 26 Oct | Literature search                         | n/a        | Find 6 IEEE Xplore papers (2022 or later) on rice or leaf disease classification from images. Save as `papers/paper1.pdf` to `paper6.pdf`. Assign Papers 1 to 4 in the group chat (Amit 1, Akram 2, Sabir 3, Aziz 4). Papers 5 and 6 are spares |
-| Tue 27 Oct | Section 3 Problem Description             | 1 page     | About 330 words plus the sample-image figure. Uses Moinul's dataset inspection. Frames the task as image classification and argues for the method                                                                                               |
-| Wed 28 Oct | Section 5 Method part                     | 2 pages    | Rationale for the method, block diagram, step-by-step algorithm in pseudocode                                                                                                                                                                   |
-| Thu 29 Oct | Section 4 Related Work                    | 2 pages    | Edit the 4 summaries for consistent style; fix citation numbers. If a summary is missing or below standard, write one from Paper 5 or 6                                                                                                         |
-| Sat 31 Oct | Review Section 6                          | n/a        | Check it against the brief's 6.1, 6.2 and 6.3 requirements                                                                                                                                                                                      |
-| Sat 31 Oct | Executive Summary, coversheet, formatting | 0.5 page   | Summary of about 220 words covering Sections 3 to 6. Coversheet lists each member's finished tasks. Check every section is within its page limit                                                                                                |
+| Due              | Task                                      | Size limit | Details                                                                                                                                                                                                                                           |
+|------------------|-------------------------------------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Mon 26 Oct, 12pm | Literature search                         | n/a        | Find 6 IEEE Xplore papers (2022 or later) on rice or leaf disease classification from images. Upload as `papers/paper1.pdf` to `paper6.pdf`. Assign Papers 1 to 4 in the group chat (Amit 1, Akram 2, Sabir 3, Aziz 4). Papers 5 and 6 are spares |
+| Mon 26 Oct       | Report template                           | n/a        | Google Doc (link added to the repo README) with all 8 section headings, **each section starting on a new page**, 12pt font, 1.25 cm margins, page numbers starting from 1 after the coversheet                                                    |
+| Tue 27 Oct       | Section 3 Problem Description             | 1 page     | About 330 words plus the sample-image figure. Uses Moinul's dataset inspection (ready Mon 26). Frames the task as image classification and argues for the method                                                                                  |
+| Tue 27 Oct       | Section 5 Method part                     | 2 pages    | Rationale for the method, block diagram, step-by-step algorithm in pseudocode                                                                                                                                                                     |
+| Wed 28 Oct       | Section 4 Related Work                    | 2 pages    | Edit the 4 summaries for consistent style; fix citation numbers. If a summary is missing or below standard, write one from Paper 5 or 6                                                                                                           |
+| Thu 29 Oct       | Review Section 6                          | n/a        | Check it against the brief's 6.1, 6.2 and 6.3 requirements                                                                                                                                                                                        |
+| Thu 29 Oct       | Executive Summary, coversheet, formatting | 0.5 page   | Summary of about 220 words covering Sections 3 to 6. Coversheet lists each member's finished tasks. Check every section is within its page limit                                                                                                  |
 
 <div class="member-head" style="margin-top:18pt">
 
@@ -735,16 +742,14 @@ All code, Section 6, submission
 
 </div>
 
-| Due            | Task                                                    | Size limit  | Details                                                                                                                                                                                                                                  |
-|----------------|---------------------------------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Sun 25 Oct     | Setup                                                   | n/a         | Share this plan; create the Google Drive folder and GitHub repo and post both links; download the dataset and check its folder structure                                                                                                 |
-| Mon 26 Oct     | Dataset inspection, baseline                            | 1 page      | Image counts per disease and background, image sizes, 6 notes on what makes the images hard, saved to `dataset-notes/` for Anika. Data loading, 5 seeded stratified splits, colour + HOG + SVM on one split                              |
-| Tue 27 Oct     | Main method                                             | n/a         | ResNet-18 features + SVM on one split; first results in `results/` for Akram                                                                                                                                                             |
-| Wed 28 Oct     | All experiments                                         | n/a         | 2 methods x 3 scenarios x 5 splits                                                                                                                                                                                                       |
-| Thu 29 Oct     | Implementation part, wrong-prediction list, User Manual | 1 page each | Implementation described in modules and pseudocode (no Python code in the report). `wrong_predictions.csv` for Amit. Merge Akram's `plots.py`. Combine run steps with Sabir's install page into `docs/user_manual.docx` for Akram's test |
-| Fri 30 Oct     | Section 6.1 and 6.2 draft, fix test issues              |             | Settings table; results table (mean and std for each method and scenario). Fix anything Akram's clean-machine test found                                                                                                                 |
-| Sat 31 Oct     | Code freeze, Section 6 final, final merge               | 2 pages     | Section 6.3 discussion using Amit's failure cases and Akram's figures. Final merge with Anika                                                                                                                                            |
-| **Sat 31 Oct** | **Submit on Moodle**                                    |             | Zip containing only the `.py` file and the `.pdf` report (no images, no interim data)                                                                                                                                                    |
+| Due            | Task                                                                     | Size limit  | Details                                                                                                                                                                                                                                                                                        |
+|----------------|--------------------------------------------------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Sun 25 Oct     | Setup                                                                    | n/a         | Share this plan; create the private GitHub repo, invite everyone and post the link; download the dataset and check its folder structure                                                                                                                                                        |
+| Mon 26 Oct     | Dataset inspection, baseline, main method on one split                   | 1 page      | Image counts per disease and background, image sizes, 6 notes on what makes the images hard, uploaded to `dataset-notes/` for Anika. Data loading, 5 seeded stratified splits, colour + HOG + SVM, then ResNet-18 features + SVM on one split; first results in `results/` for Akram (evening) |
+| Tue 27 Oct     | All experiments, implementation part, wrong-prediction list, User Manual | 1 page each | 2 methods x 3 scenarios x 5 splits. Implementation described in modules and pseudocode (no Python code in the report). `wrong_predictions.csv` for Amit. Merge Akram's `plots.py`. Combine run steps with Sabir's install page into `docs/user_manual.docx` for Akram's test (evening)         |
+| Wed 28 Oct     | Fix test issues, Section 6                                               | 2 pages     | Fix anything Akram's clean-machine test found. Settings table; results table (mean and std); 6.3 discussion using Amit's failure cases and Akram's figures                                                                                                                                     |
+| Thu 29 Oct     | Code freeze, final merge                                                 |             | With Anika                                                                                                                                                                                                                                                                                     |
+| **Thu 29 Oct** | **Submit on Moodle**                                                     |             | Zip containing only the `.py` file and the `.pdf` report (no images, no interim data)                                                                                                                                                                                                          |
 
 <div class="box note" style="margin-top:14pt">
 
