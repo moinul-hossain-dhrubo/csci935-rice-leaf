@@ -1,0 +1,16 @@
+# Dataset and interim data (never commit)
+Dhan-Shomadhan/
+*.zip
+# Model weights and caches
+*.pt
+*.pth
+__pycache__/
+*.pyc
+.venv/
+venv/
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+# Private notes must never be here
+admin/
