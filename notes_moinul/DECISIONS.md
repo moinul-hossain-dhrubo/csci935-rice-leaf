@@ -200,3 +200,16 @@ group name once known.
 **D19. Group name: Group 24 (Moodle). Submission files `group24.py`, `group24.pdf`, `group24.zip`.**
 Lowercase, no spaces, so the marker can type it on any system. `group_name.py`
 renamed to `group24.py` (git history kept); README gained the run commands.
+
+**D20. Pinned package versions in `requirements.txt`; OpenCV 4.13 (the brief's version) instead of opencv-contrib-python 5.0.**
+Versions are those of the Mac environment that produced the results (Python
+3.12.12, numpy 2.5.4, matplotlib 3.11.2, scikit-learn 1.9.1, scikit-image
+0.26.0, torch 2.14.1, torchvision 0.29.1), read from `.venv` on 26 Oct.
+OpenCV: the brief permits "OpenCV 4.13"; the code needs no contrib modules.
+Tested in the sandbox: with opencv-python 4.13.0.92 the baseline features are
+identical to the Mac's OpenCV 5.0 features (max difference 0.0) and the
+inspection gives the same counts and checks.
+torchvision is required for the ResNet-18 model and weights; it is part of the
+PyTorch project, and the User Manual states it explicitly.
+Alternative rejected: unpinned packages (a future release could change results
+or break the code on the marker's machine).
