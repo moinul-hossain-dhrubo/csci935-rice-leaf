@@ -178,3 +178,19 @@ rewritten.
 Meaning: the single submission file reproduces every reported number from
 scratch on the Mac in about 5 minutes. These are the final numbers for
 Section 6 unless the method changes.
+
+## Step 8 (26 Oct): attempt to measure the same-leaf effect (exploratory, sandbox, not for the report tables)
+
+Question: do field leaves photographed twice (Step 1) inflate the field score?
+1. ResNet-18 cosine similarity of known twin pairs: 0.952 to 0.993; but the
+   median field image's nearest field neighbour is already 0.95, and unrelated
+   pairs with different diseases reach 0.971 (bsf_46 / sbf_50). The pooled
+   features cannot single out twins.
+2. Proxy: field test predictions whose consecutively numbered neighbour was in
+   training: 328 of 340 (accuracy 0.588) vs 12 without (0.333). With 80% of
+   images in training almost every image has such a neighbour, so the
+   comparison has too few cases to mean anything.
+Meaning: the effect cannot be measured reliably with the tools at hand. It is
+reported in 6.3 as an unquantified limitation; the fix would be splitting by
+capture sequence (keeping likely twins on the same side), which needs
+reliable twin labels the dataset does not provide.
