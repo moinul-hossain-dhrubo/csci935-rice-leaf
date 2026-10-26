@@ -186,3 +186,13 @@ the grid is the same for both methods. The first run's numbers stay in
 ANALYSIS_LOG Step 5 for the record; the report uses the rerun.
 Alternative rejected: keeping the narrow grid (the baseline would look
 worse than it is, an unfair comparison).
+
+**D18. Submission file `group_name.py` built on 26 Oct evening (merge moved earlier than D8's Tue morning).**
+One file, five stage functions, run with `python group_name.py all` or one
+stage name. Stage files 01 to 05 stay in the repo as the development
+history; from now on changes are made in `group_name.py` (and mirrored in a
+stage file only if that stage is rerun separately). Checked in the sandbox:
+splits file byte-identical, baseline features identical (max difference 0.0)
+and split-0 main-method results identical to the stage files.
+Akram's `plots.py` is merged on Tue when it arrives. Renamed to the real
+group name once known.
