@@ -8,6 +8,8 @@ import csv
 
 DATASET_DIR = Path("Dhan-Shomadhan")
 INTERIM_DIR = DATASET_DIR / "_interim"          # brief rule (b): interim data lives here
+SPLITS_FILE = INTERIM_DIR / "splits.csv"
+RESULTS_DIR = Path("results")
 
 CLASSES = ["Brown Spot", "Leaf Scald", "Rice Blast", "Rice Tungro", "Sheath Blight"]
 BACKGROUNDS = ["white", "field"]
@@ -54,7 +56,8 @@ def list_images(dataset_dir=DATASET_DIR):
 
     Only the two background folders are scanned, so anything in _interim/
     is never treated as a dataset image. Sorted, so the order is the same on
-    every machine.
+    every machine (sorted by the name string, because Windows compares paths
+    without regard to upper/lower case and macOS/Linux do not).
     """
     dataset_dir = Path(dataset_dir)
     if not dataset_dir.is_dir():
@@ -62,13 +65,13 @@ def list_images(dataset_dir=DATASET_DIR):
             f"Dataset folder not found: {dataset_dir.resolve()}. "
             f"Run the code from the folder that contains Dhan-Shomadhan/.")
     records = []
-    for bg_dir in sorted(p for p in dataset_dir.iterdir() if p.is_dir()):
+    for bg_dir in sorted((p for p in dataset_dir.iterdir() if p.is_dir()), key=lambda p: p.name):
         if bg_dir.name.strip().lower().startswith("_"):
             continue                              # _interim and similar
         background = background_from_folder(bg_dir.name)
-        for dz_dir in sorted(p for p in bg_dir.iterdir() if p.is_dir()):
+        for dz_dir in sorted((p for p in bg_dir.iterdir() if p.is_dir()), key=lambda p: p.name):
             disease = disease_from_folder(dz_dir.name)
-            for f in sorted(dz_dir.iterdir()):
+            for f in sorted(dz_dir.iterdir(), key=lambda p: p.name):
                 if f.is_file() and f.suffix.lower() in IMAGE_EXTENSIONS:
                     records.append({"path": f, "file": f.name,
                                     "background": background, "disease": disease})
@@ -88,3 +91,16 @@ def read_label_csv(dataset_dir=DATASET_DIR):
             labels[row["pictureName"].strip()] = (disease_from_folder(disease_part),
                                                   background_from_folder(bg_part))
     return labels
+
+
+def load_splits():
+    """Read the saved splits: list of dicts with file, background, disease, path, split0..split4."""
+    if not SPLITS_FILE.exists():
+        raise FileNotFoundError(f"{SPLITS_FILE} not found. Run Stage 2 (02_splits.py) first.")
+    paths = {(r["file"], r["background"], r["disease"]): r["path"] for r in list_images()}
+    rows = []
+    with open(SPLITS_FILE, newline="") as fh:
+        for row in csv.DictReader(fh):
+            row["path"] = paths[(row["file"], row["background"], row["disease"])]
+            rows.append(row)
+    return rows

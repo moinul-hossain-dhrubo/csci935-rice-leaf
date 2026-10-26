@@ -114,3 +114,14 @@ size, so macro F1 (the average of the per-class F1 scores, each class counting
 equally) shows whether small classes such as Field Brown Spot are being missed.
 Per-class precision, recall and F1, and confusion matrices summed over splits,
 are also saved for 6.3 and Akram's figures (`results/README.md`).
+
+**D12. Splits made once by Stage 2 and saved to `Dhan-Shomadhan/_interim/splits.csv`; every later stage reads that file.**
+Why: both methods must sit exactly the same exam in each split. One saved
+file removes any chance of a stage drifting to a different split. Files are
+listed sorted by their name string (not by path object), because Windows
+compares paths ignoring upper/lower case; this keeps the list order, and so
+the seeded split, identical on Mac and on the marker's Windows machine.
+Split made with scikit-learn `train_test_split(test_size=0.2,
+stratify=disease|background, random_state=seed)`, seeds 0 to 4.
+Alternative rejected: each stage splitting on the fly with the same seed
+(works only if every stage lists files identically, a silent risk).

@@ -132,3 +132,76 @@ of field photos of the same leaf taken seconds apart."
    healthy green around it.
 6. **No copied files, but some field leaves were photographed twice**
    (`rtf_17` / `rtf_18`). Worth measuring later with better features.
+
+---
+
+## L2. Stage 2 (`02_splits.py`): dividing the images fairly, five times
+
+### The big idea: a fair exam, repeated
+A test score only means something if the test questions were never seen
+during study. Stage 2 decides, once and for all, which images are "study
+material" (training, 80%) and which are "exam questions" (test, 20%), for
+each of the 5 splits. It saves that decision to a file, and every later stage
+reads the same file. No later stage is allowed to make its own split.
+
+### Concept 1: a random seed
+Analogy: shuffling a deck of cards, but writing down exactly how you shuffled
+so anyone can repeat it. The seed (0, 1, 2, 3, 4) is that written-down
+shuffle. Same seed = same split on any computer, so the marker reproduces our
+exact numbers. Different seeds = different splits, which is what the brief's
+"5 runs with different random splits" asks for.
+
+### Concept 2: stratified, by disease x background
+Analogy: picking a 20% sample from a school by taking 20% of each class, not
+20% of whoever walks past first. There are 10 groups (5 diseases x 2
+backgrounds), from 49 to 219 images. Each group gives 20% of its own images
+to the test part, so every test part has the same mix: about 154 white and
+67 field images, and roughly 10 Field Brown Spot images. Without this, one
+split might by chance get 4 Field Brown Spot test images and another 16.
+
+### Concept 3: why save the split to a file
+If each stage made its own split, a tiny difference (a file listed in a
+different order on Windows) could put an image in training for the baseline
+and in testing for the main method. Then the two methods would sit different
+exams and could not be compared. Saving once removes that risk. The file is
+interim data, so it lives at `Dhan-Shomadhan/_interim/splits.csv` (D10), and
+the code that makes it is part of the submission (brief rule b).
+
+### Concept 4: images can move between splits, and that is fine
+An image in the training part of split 0 can be in the test part of split 1.
+That is not leakage: each split is a separate experiment with its own model,
+trained from scratch. Leakage only happens when one model is tested on an
+image it trained on. The check that matters is inside each split: training
+and test share no image.
+
+### Concept 5: a known weak spot, the same leaf twice
+Stage 1 found field leaves photographed twice (`rtf_17` / `rtf_18`). A random
+split can put one in training and the other in test. This is not fixed here
+(the measure is not reliable enough to group them all), but Stage 5 will
+count how often it happened, and 6.3 reports it as a limitation.
+
+### What to say in a demo
+"We split the 1106 images 80/20 into training and test, stratified by
+disease and background, so every test set has the same mix of white and field
+images of each disease. We did this 5 times with fixed seeds 0 to 4, saved
+the splits to a file, and every method uses that same file, so both methods
+are tested on exactly the same images in each split."
+
+### Check yourself
+1. Why must the baseline and the main method use the same saved splits?
+2. Is it a problem that `bs_wb_12.jpg` is in training in split 0 and in test in split 2?
+3. What would go wrong if the split were stratified by disease only?
+4. The marker runs our code on Windows. Why does a fixed seed alone not
+   guarantee the same split, and what in the code protects against that?
+
+### Answers
+1. So both sit the same exam. Otherwise a difference in scores could come from
+   easier test images, not better features.
+2. No. Each split trains its own model from scratch; within each split,
+   training and test are separate.
+3. A split could by chance get very few field images of one disease in its test
+   part, making the field score for that split jumpy and the white/field
+   comparison unfair.
+4. The seed fixes the shuffle, but the shuffle is applied to a list; if the list
+   came in a different order, the result would differ. `list_images()` sorts
+   the files by name, so the list is the same on every computer.
