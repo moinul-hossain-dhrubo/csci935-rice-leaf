@@ -218,3 +218,83 @@ are tested on exactly the same images in each split."
    image once, but the brief asks for random splits.
 4. **The Mac run matched the sandbox run exactly**, so the splits are
    reproducible across machines.
+
+---
+
+## L3. Stage 3 (`03_baseline_features.py`): describing images by hand-made rules
+
+### The big idea: turning a picture into a list of numbers
+An SVM cannot look at a photo. It needs every image described by the same
+fixed-length list of numbers (a **feature vector**), so that similar images
+get similar lists. The baseline uses rules a person designed: "how much of
+each colour is there?" and "which way do the edges point?". Stage 4 will use
+rules ResNet-18 learned from millions of photos. Comparing the two answers the
+question: do learned features beat hand-made ones on this problem?
+
+### Concept 1: a fixed size first
+Analogy: to compare handwriting, you first scale every page to the same size.
+Images are shrunk to 128 x 256 pixels (width x height), close to their real
+1 : 2.1 shape, so leaves are barely squashed. The 11 sideways field photos are
+turned upright first, since almost every leaf in the dataset runs vertically.
+
+### Concept 2: colour histogram
+Analogy: emptying a jar of beads and counting how many of each colour, without
+caring where each bead was. A histogram counts how many pixels fall into
+each colour range ("bin"). It ignores position, so a lesion at the top or the
+bottom of the leaf counts the same.
+- **HSV**: Hue (which paint colour), Saturation (how strong), Value (how
+  bright). Hue stays fairly steady when the light changes, unlike raw RGB.
+  Bins: 16 for hue, 8 for saturation, 8 for value.
+- **YCrCb**: Y is brightness, Cr and Cb are "how red" and "how blue". Only Cr
+  and Cb are used (16 bins each), so this part ignores brightness.
+- Each histogram is divided by the pixel count, so it shows shares, not counts.
+Total colour features: 16 + 8 + 8 + 16 + 16 = 64 numbers.
+
+### Concept 3: HOG (histogram of oriented gradients)
+Analogy: describing a drawing by the direction of its pencil strokes in each
+small square of the page. The image is cut into 16 x 16 pixel cells. In each
+cell, HOG measures edge directions (9 direction bins between 0 and 180
+degrees) and how strong they are. Neighbouring cells are grouped in 2 x 2
+blocks and normalised, so a darker or lighter photo gives similar values.
+On a 128 x 256 image: 8 x 16 cells, 7 x 15 blocks, 4 cells x 9 bins each =
+7 x 15 x 36 = 3780 numbers. HOG captures shape: the long edges of the leaf,
+the outline of a lesion.
+
+### Concept 4: why this step cannot leak test information
+Each image's features are computed from that image alone, with fixed rules.
+Nothing is "learned" from other images here. So computing features for all
+1106 images at once is safe. Anything that learns from data (scaling the
+features, tuning the SVM) happens later, on the training part only.
+
+### Concept 5: the baseline's built-in weakness
+The histograms count every pixel, background included. On a white image about
+a quarter of the pixels are near-white paper; in the field, most pixels are
+healthy leaves and soil. So the colour features partly describe the
+background, not the disease. That is expected to hurt most on field images,
+and it is one reason to expect the learned features to do better.
+
+### What to say in a demo
+"Our baseline describes each image with 3844 hand-made numbers: 64 for
+colour (HSV and YCrCb histograms) and 3780 for edge directions (HOG), from
+the image resized to 128 x 256. These rules are fixed, so they cannot leak
+test information. Their weakness is that they describe the whole image,
+background included, which is why we expected them to struggle on field
+images."
+
+### Check yourself
+1. Why is hue more useful than raw red/green/blue when lighting changes?
+2. Two Brown Spot leaves, one with spots near the top, one near the bottom.
+   Do their colour histograms differ? Do their HOG features?
+3. Why is the Y channel left out of the YCrCb histogram?
+4. Why is it safe to compute features for all images before splitting, but not
+   safe to fit a feature scaler on all images?
+
+### Answers
+1. Dimmer light lowers all three RGB values together, changing the "colour" in
+   RGB; hue describes which colour it is and changes much less.
+2. Colour histograms: hardly, they ignore position. HOG: yes, the edges sit in
+   different cells.
+3. Y is brightness, already covered by HSV's V; leaving it out keeps this part
+   about colour only and less sensitive to lighting.
+4. Features use fixed rules per image. A scaler learns a mean and spread from
+   the images it sees; fitted on all images, it would learn from test images.

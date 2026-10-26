@@ -125,3 +125,18 @@ Split made with scikit-learn `train_test_split(test_size=0.2,
 stratify=disease|background, random_state=seed)`, seeds 0 to 4.
 Alternative rejected: each stage splitting on the fly with the same seed
 (works only if every stage lists files identically, a silent risk).
+
+**D13. Baseline image preparation: upright, 128 x 256, features of the whole image.**
+Landscape photos (11, all field) are rotated to portrait, since leaves in the
+dataset run vertically. Images are resized to 128 x 256 (w x h), close to the
+1 : 2.1 shape of the photos, so leaves are barely distorted. Colour: HSV
+(H 16, S 8, V 8 bins) and YCrCb (Cr 16, Cb 16 bins), each normalised to sum
+to 1: 64 numbers. HOG: 9 orientations, 16 x 16 cells, 2 x 2 blocks, L2-Hys:
+3780 numbers. Total 3844. Read at 1/4 resolution for speed (22 s for all
+images in testing).
+Why: a standard, simple hand-made descriptor of colour (lesion colour) and
+shape (edges), cheap to compute and easy to describe in pseudocode.
+Alternative rejected: segmenting the leaf from the background first (better
+features, but that is an improvement to discuss in 6.3, not a baseline);
+larger HOG images (thousands more numbers for 884 training images, more
+risk of overfitting).
