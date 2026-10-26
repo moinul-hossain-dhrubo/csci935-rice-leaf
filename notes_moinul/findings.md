@@ -25,6 +25,33 @@ Sections are filled as each stage runs.
 
 ## 2. Experimental settings (for 6.1)
 
+- Five splits, 80% training (884 images) / 20% test (222: 154 white, 68 field),
+  stratified by disease x background, seeds 0 to 4 (`results/logs/02_splits_log.txt`).
+- SVM settings were chosen by 5-fold cross-validation on the training part only;
+  chosen per split in `results/best_params.csv` (main method: RBF, C = 10 in all
+  5 splits).
+- Full settings: `REPORT_DRAFT.md` 6.1 and `DECISIONS.md` D13 to D17.
+
 ## 3. Results (for 6.2)
 
+From `results/logs/05_train_evaluate_log.txt` (run of 26 Oct with the D17 grid),
+mean +/- std over 5 splits:
+- The main method (ResNet-18 + SVM) reached accuracy 0.7467 +/- 0.0183 on white
+  test images, 0.5794 +/- 0.0472 on field and 0.6955 +/- 0.0164 on mixed.
+- The baseline (colour + HOG + SVM) reached 0.5000 +/- 0.0475 white,
+  0.4118 +/- 0.0883 field and 0.4730 +/- 0.0394 mixed.
+- The main method trained on white images only scored 0.2206 on field images in
+  every split: it predicted Leaf Scald for every field image
+  (`confusion_resnet18_svm_whiteonly_field.csv`).
+
 ## 4. Success and failure cases (for 6.3)
+
+- Mean recall of the main method over 5 splits (`results/per_class.csv`):
+  Sheath Blight 0.927 white / 0.677 field, Rice Blast 0.795 / 0.627, Rice Tungro
+  0.733 / 0.707, Leaf Scald 0.579 / 0.440, Brown Spot 0.478 / 0.400.
+- Most frequent confusions, main method, mixed, summed over 5 splits
+  (`confusion_resnet18_svm_mixed.csv`): Leaf Scald predicted as Rice Blast 37
+  times, Brown Spot as Leaf Scald 36, Leaf Scald as Brown Spot 24, Brown Spot
+  as Rice Blast 24.
+- 239 test images were misclassified by the main method at least once (139
+  white, 100 field) (`wrong_predictions.csv`). Amit's review of 6 of them: to come.

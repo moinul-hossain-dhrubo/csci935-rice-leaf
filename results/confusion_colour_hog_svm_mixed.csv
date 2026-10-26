@@ -1,6 +1,6 @@
 true \ predicted,Brown Spot,Leaf Scald,Rice Blast,Rice Tungro,Sheath Blight
-Brown Spot,27,29,49,15,20
-Leaf Scald,16,72,63,23,41
-Rice Blast,28,49,146,25,27
-Rice Tungro,15,26,28,96,30
-Sheath Blight,17,18,42,17,191
+Brown Spot,27,27,50,16,20
+Leaf Scald,16,73,63,24,39
+Rice Blast,32,49,141,27,26
+Rice Tungro,15,24,29,97,30
+Sheath Blight,18,21,42,17,187

@@ -132,3 +132,30 @@ Meaning:
 5. The baseline's C sits at the largest value tried (100) and its gamma at the
    smallest in every split: by the D15 rule the grid should be widened, so the
    baseline is not under-tuned.
+
+## Step 6 (26 Oct): rerun with the widened grid (D17)
+
+Stage: `05_train_evaluate.py` (grid of D17). Output: same files as Step 5,
+overwritten; `results/logs/05_train_evaluate_log.txt`. Run time 186 s.
+
+| method | scenario | accuracy | macro F1 |
+|---|---|---|---|
+| colour_hog_svm | white | 0.5000 +/- 0.0475 | 0.4526 +/- 0.0515 |
+| colour_hog_svm | field | 0.4118 +/- 0.0883 | 0.3977 +/- 0.0813 |
+| colour_hog_svm | mixed | 0.4730 +/- 0.0394 | 0.4392 +/- 0.0401 |
+| resnet18_svm | white | 0.7467 +/- 0.0183 | 0.7099 +/- 0.0233 |
+| resnet18_svm | field | 0.5794 +/- 0.0472 | 0.5699 +/- 0.0602 |
+| resnet18_svm | mixed | 0.6955 +/- 0.0164 | 0.6674 +/- 0.0269 |
+| resnet18_svm_whiteonly | field | 0.2206 +/- 0.0000 | 0.0723 +/- 0.0000 |
+
+- Baseline chosen (`best_params.csv`): RBF in all 5 splits; C = 100 in 4, 1000 in
+  1; gamma = 1/(4 x 3844) in 3 splits, 1/(16 x 3844) (grid edge) in 2.
+  CV macro F1 0.4167 to 0.4553.
+- Main method: identical choices and results to Step 5 (C = 10, interior).
+
+Meaning: the baseline's settings now sit inside the grid in most splits, so
+the grid is settled (D17 rule). The wider grid raised the baseline's CV score
+on split 0 (0.4085 to 0.4252) but its test accuracy moved slightly down
+(mixed 0.4793 to 0.4730), within one standard deviation: tuning was not the
+reason the baseline trails. The main method's lead (about 22 points on mixed
+test images) stands.

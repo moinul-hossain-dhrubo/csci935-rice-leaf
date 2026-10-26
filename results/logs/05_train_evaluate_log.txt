@@ -1,52 +1,52 @@
 
 == colour_hog_svm: 3844 features ==
-  split0: chosen {'svc__C': 100, 'svc__gamma': 6.503642039542144e-05, 'svc__kernel': 'rbf'}, CV macro F1 0.4085 (19 s)
-    white  n=154  accuracy 0.4935  macro F1 0.4269
-    field  n= 68  accuracy 0.4853  macro F1 0.4779
-    mixed  n=222  accuracy 0.4910  macro F1 0.4466
-  split1: chosen {'svc__C': 100, 'svc__gamma': 6.503642039542144e-05, 'svc__kernel': 'rbf'}, CV macro F1 0.4167 (36 s)
+  split0: chosen {'svc__C': 100, 'svc__gamma': 1.625910509885536e-05, 'svc__kernel': 'rbf'}, CV macro F1 0.4252 (34 s)
+    white  n=154  accuracy 0.4935  macro F1 0.4296
+    field  n= 68  accuracy 0.4853  macro F1 0.4785
+    mixed  n=222  accuracy 0.4910  macro F1 0.4507
+  split1: chosen {'svc__C': 100, 'svc__gamma': 6.503642039542144e-05, 'svc__kernel': 'rbf'}, CV macro F1 0.4167 (68 s)
     white  n=154  accuracy 0.5519  macro F1 0.5106
     field  n= 68  accuracy 0.4853  macro F1 0.4526
     mixed  n=222  accuracy 0.5315  macro F1 0.4972
-  split2: chosen {'svc__C': 100, 'svc__gamma': 6.503642039542144e-05, 'svc__kernel': 'rbf'}, CV macro F1 0.4553 (54 s)
+  split2: chosen {'svc__C': 100, 'svc__gamma': 6.503642039542144e-05, 'svc__kernel': 'rbf'}, CV macro F1 0.4553 (102 s)
     white  n=154  accuracy 0.4481  macro F1 0.4208
     field  n= 68  accuracy 0.4412  macro F1 0.4208
     mixed  n=222  accuracy 0.4459  macro F1 0.4268
-  split3: chosen {'svc__C': 100, 'svc__gamma': 6.503642039542144e-05, 'svc__kernel': 'rbf'}, CV macro F1 0.4320 (72 s)
+  split3: chosen {'svc__C': 100, 'svc__gamma': 6.503642039542144e-05, 'svc__kernel': 'rbf'}, CV macro F1 0.4320 (135 s)
     white  n=154  accuracy 0.5455  macro F1 0.5043
     field  n= 68  accuracy 0.2794  macro F1 0.2750
     mixed  n=222  accuracy 0.4640  macro F1 0.4347
-  split4: chosen {'svc__C': 100, 'svc__gamma': 6.503642039542144e-05, 'svc__kernel': 'rbf'}, CV macro F1 0.4421 (90 s)
-    white  n=154  accuracy 0.5000  macro F1 0.4235
-    field  n= 68  accuracy 0.3824  macro F1 0.3761
-    mixed  n=222  accuracy 0.4640  macro F1 0.4127
+  split4: chosen {'svc__C': 1000, 'svc__gamma': 1.625910509885536e-05, 'svc__kernel': 'rbf'}, CV macro F1 0.4487 (169 s)
+    white  n=154  accuracy 0.4610  macro F1 0.3976
+    field  n= 68  accuracy 0.3676  macro F1 0.3618
+    mixed  n=222  accuracy 0.4324  macro F1 0.3865
 
 == resnet18_svm: 512 features ==
-  split0: chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}, CV macro F1 0.6864 (91 s)
+  split0: chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}, CV macro F1 0.6864 (171 s)
     white  n=154  accuracy 0.7338  macro F1 0.6800
     field  n= 68  accuracy 0.5588  macro F1 0.5335
     mixed  n=222  accuracy 0.6802  macro F1 0.6332
   split0 extra (train white only): chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}
     field  n= 68  accuracy 0.2206  macro F1 0.0723
-  split1: chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}, CV macro F1 0.6737 (93 s)
+  split1: chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}, CV macro F1 0.6737 (175 s)
     white  n=154  accuracy 0.7597  macro F1 0.7206
     field  n= 68  accuracy 0.6324  macro F1 0.6418
     mixed  n=222  accuracy 0.7207  macro F1 0.7038
   split1 extra (train white only): chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}
     field  n= 68  accuracy 0.2206  macro F1 0.0723
-  split2: chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}, CV macro F1 0.6853 (95 s)
+  split2: chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}, CV macro F1 0.6853 (178 s)
     white  n=154  accuracy 0.7208  macro F1 0.6910
     field  n= 68  accuracy 0.6176  macro F1 0.6178
     mixed  n=222  accuracy 0.6892  macro F1 0.6689
   split2 extra (train white only): chosen {'svc__C': 10, 'svc__gamma': 0.00048828125, 'svc__kernel': 'rbf'}
     field  n= 68  accuracy 0.2206  macro F1 0.0723
-  split3: chosen {'svc__C': 10, 'svc__gamma': 0.00048828125, 'svc__kernel': 'rbf'}, CV macro F1 0.6760 (97 s)
+  split3: chosen {'svc__C': 10, 'svc__gamma': 0.00048828125, 'svc__kernel': 'rbf'}, CV macro F1 0.6760 (181 s)
     white  n=154  accuracy 0.7597  macro F1 0.7357
     field  n= 68  accuracy 0.5735  macro F1 0.5616
     mixed  n=222  accuracy 0.7027  macro F1 0.6797
   split3 extra (train white only): chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}
     field  n= 68  accuracy 0.2206  macro F1 0.0723
-  split4: chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}, CV macro F1 0.6590 (99 s)
+  split4: chosen {'svc__C': 10, 'svc__gamma': 0.001953125, 'svc__kernel': 'rbf'}, CV macro F1 0.6590 (185 s)
     white  n=154  accuracy 0.7597  macro F1 0.7221
     field  n= 68  accuracy 0.5147  macro F1 0.4949
     mixed  n=222  accuracy 0.6847  macro F1 0.6515
@@ -55,13 +55,13 @@
 
 == Mean +/- std over splits [0, 1, 2, 3, 4] (std = sample std, ddof=1) ==
   method                  scenario           accuracy          macro F1
-  colour_hog_svm          white        0.5078 +/- 0.0424    0.4572 +/- 0.0460
-  colour_hog_svm          field        0.4147 +/- 0.0866    0.4005 +/- 0.0798
-  colour_hog_svm          mixed        0.4793 +/- 0.0333    0.4436 +/- 0.0324
+  colour_hog_svm          white        0.5000 +/- 0.0475    0.4526 +/- 0.0515
+  colour_hog_svm          field        0.4118 +/- 0.0883    0.3977 +/- 0.0813
+  colour_hog_svm          mixed        0.4730 +/- 0.0394    0.4392 +/- 0.0401
   resnet18_svm            white        0.7467 +/- 0.0183    0.7099 +/- 0.0233
   resnet18_svm            field        0.5794 +/- 0.0472    0.5699 +/- 0.0602
   resnet18_svm            mixed        0.6955 +/- 0.0164    0.6674 +/- 0.0269
   resnet18_svm_whiteonly  field        0.2206 +/- 0.0000    0.0723 +/- 0.0000
 
 Main-method test images wrong at least once: 239 (white 139, field 100)
-Time: 99 s
+Time: 186 s
