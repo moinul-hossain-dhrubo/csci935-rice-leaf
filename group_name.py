@@ -628,6 +628,13 @@ def stage_evaluate(P, split_ids):
             if sel:
                 a = np.array([s[3] for s in sel]); f = np.array([s[4] for s in sel])
                 log(f"  {method:24}{scen:9}{a.mean():>10.4f} +/- {sd(a):.4f}{f.mean():>10.4f} +/- {sd(f):.4f}")
+    log("\n== Mean recall per class over the splits (share of each disease's test images found) ==")
+    log(f"  {'method':24}{'scenario':9}" + "".join(f"{c:>15}" for c in CLASSES))
+    for method in METHODS:
+        for scen in SCENARIOS:
+            vals = [np.mean([pc[5] for pc in per_class if pc[0] == method and pc[1] == scen and pc[3] == c])
+                    for c in CLASSES]
+            log(f"  {method:24}{scen:9}" + "".join(f"{v:>15.3f}" for v in vals))
     log(f"\nMain-method test images wrong at least once: {len(wrong_rows)} "
         f"(white {sum(r[1] == 'white' for r in wrong_rows)}, field {sum(r[1] == 'field' for r in wrong_rows)})")
     log(f"Time: {time.time() - t0:.0f} s")
