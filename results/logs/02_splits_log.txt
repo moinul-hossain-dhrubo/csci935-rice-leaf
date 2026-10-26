@@ -1,0 +1,27 @@
+Images: 1106; groups: 10; test fraction 0.2; seeds [0, 1, 2, 3, 4]
+
+Test images per group (disease, background) in each split:
+  group                           s0    s1    s2    s3    s4    of
+  Brown Spot / white              18    18    18    18    18    90
+  Brown Spot / field              10    10    10    10    10    49
+  Leaf Scald / white              28    28    28    28    28   143
+  Leaf Scald / field              15    15    15    15    15    74
+  Rice Blast / white              40    40    40    40    40   198
+  Rice Blast / field              15    15    15    15    15    74
+  Rice Tungro / white             24    24    24    24    24   119
+  Rice Tungro / field             15    15    15    15    15    76
+  Sheath Blight / white           44    44    44    44    44   219
+  Sheath Blight / field           13    13    13    13    13    64
+
+Per split: train / test, and test white / field:
+  split0: train 884, test 222 (white 154, field 68)
+  split1: train 884, test 222 (white 154, field 68)
+  split2: train 884, test 222 (white 154, field 68)
+  split3: train 884, test 222 (white 154, field 68)
+  split4: train 884, test 222 (white 154, field 68)
+
+How many of the 5 splits each image is a test image in (0 = never tested, 5 = always):
+  0: 367 images, 1: 436 images, 2: 242 images, 3: 54 images, 4: 7 images, 5: 0 images
+Identical splits (should be none): []
+
+Saved Dhan-Shomadhan/_interim/splits.csv

@@ -205,3 +205,16 @@ are tested on exactly the same images in each split."
 4. The seed fixes the shuffle, but the shuffle is applied to a list; if the list
    came in a different order, the result would differ. `list_images()` sorts
    the files by name, so the list is the same on every computer.
+
+### What the output showed (26 Oct, `results/logs/02_splits_log.txt`)
+1. **Every test part is the same size and mix:** 222 images (154 white, 68
+   field), with exactly the same count per group in all 5 splits. That is
+   stratification doing its job.
+2. **Field Brown Spot gets 10 test images per split**, the smallest group.
+   Expect its per-class score to swing by 10 points per mistake.
+3. **367 images were never tested in any split.** Each split draws its 20%
+   independently, so the chance of an image being missed 5 times is
+   0.8^5 = 0.33, about 363 images. 5-fold cross-validation would test every
+   image once, but the brief asks for random splits.
+4. **The Mac run matched the sandbox run exactly**, so the splits are
+   reproducible across machines.
