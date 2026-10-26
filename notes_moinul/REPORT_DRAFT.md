@@ -69,15 +69,13 @@ The grid contains a linear SVM (5 values of C) and an RBF SVM (5 values of C x
 summary, per-class, confusion-matrix and per-image prediction files, from
 which all tables and figures in Section 6 are produced.
 
-On a 16 GB M-series MacBook the modules took 48 s (M1), 1 s (M2), 20 s (M3),
-23 s (M4, Apple GPU) and 186 s (M5, all splits)
-(`dataset-notes/01_inspect_log.txt`, `results/logs/02..05`; to update from the
-final `group24.py all` run).
+On a 16 GB M-series MacBook the modules took 48 s (M1), about 1 s (M2), 21 s
+(M3), 24 s (M4, Apple GPU) and 202 s (M5, all splits), about 5 minutes in total
+(`dataset-notes/01_inspect_log.txt`, `results/logs/02..05`).
 
 ## 6 Experimental Results and Analysis (2 pages)
 
-Draft of 26 Oct from the Step 6 run (`results/`); numbers to be re-checked
-against the final `group24.py all` run. Budget: 2 pages = Table 1 + Figure
+Draft of 26 Oct; numbers from the final `group24.py all` run (ANALYSIS_LOG Step 7). Budget: 2 pages = Table 1 + Figure
 (confusion matrices, 6 cm) + Figure (failure strip, 6 cm) + about 550 words.
 
 ### 6.1 Experimental Settings
@@ -137,7 +135,7 @@ was lower than hoped: a frozen network sees each leaf only at 224 pixels wide,
 and the classifier learns from about 880 images.
 
 **Successful cases.** Sheath Blight was recognised best (mean recall 0.927 on
-white images, `per_class.csv`), followed by Rice Blast (0.795) and Rice Tungro
+white images, `05_train_evaluate_log.txt`, per-class table), followed by Rice Blast (0.795) and Rice Tungro
 (0.733): their large pale lesions, dense dark spots and orange-yellow colour
 are visible at the reduced resolution.
 
@@ -187,7 +185,7 @@ penalises Brown Spot.
    macOS/Linux `~/.cache/torch/hub/checkpoints/`, Windows
    `C:\Users\<your name>\.cache\torch\hub\checkpoints\` (create the folders
    if needed).
-4. **Run everything** (about N minutes in total on a 2024 MacBook):
+4. **Run everything** (about 5 minutes in total on an M-series MacBook with 16 GB memory):
    `python group24.py all`
    Or one stage at a time, in this order: `inspect`, `splits`, `baseline`,
    `resnet`, `evaluate`.

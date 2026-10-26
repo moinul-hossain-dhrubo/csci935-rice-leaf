@@ -13,10 +13,10 @@ Images found: 1106
 
 == 2. Label check: folder vs CSV vs file-name prefix ==
   CSV rows: 1106
-  File names used more than once across folders: 0 []
-  Images not in CSV: 0 []
-  CSV rows with no image: 0 []
-  Folder/CSV label mismatches: 0
+  File names used more than once across folders: 0
+  Images not in CSV: 0
+  CSV rows with no image: 0
+  Folder/CSV label mismatches: 0 []
   File-name prefixes per group:
     field Brown Spot    {'bsf': 49}
     field Leaf Scald    {'lsf': 74}
@@ -39,12 +39,12 @@ Images found: 1106
   Sheath Blight      219      64     283
   Total              769     337    1106
 
-== 4. Reading every image (sizes, quality statistics, hashes) ==
+== 4. Reading every image (sizes, quality statistics) ==
   200/1106 read (9 s)
   400/1106 read (17 s)
-  600/1106 read (25 s)
-  800/1106 read (34 s)
-  1000/1106 read (42 s)
+  600/1106 read (26 s)
+  800/1106 read (35 s)
+  1000/1106 read (43 s)
   Unreadable images: 0 []
 
 == 5. Image sizes per background ==

@@ -159,3 +159,22 @@ on split 0 (0.4085 to 0.4252) but its test accuracy moved slightly down
 (mixed 0.4793 to 0.4730), within one standard deviation: tuning was not the
 reason the baseline trails. The main method's lead (about 22 points on mixed
 test images) stands.
+
+## Step 7 (26 Oct): full reproduction run of the submission file
+
+Command: `python group24.py all` on the Mac. Output: all logs and result files
+rewritten.
+- Every result CSV (`results/*.csv`) and every dataset-notes CSV came out
+  byte-identical to Steps 1 to 6 (`git diff` shows no change); only log
+  wording and timings changed.
+- Times: inspect 48 s, baseline 21 s, ResNet-18 24 s (mps), evaluate 202 s
+  (`dataset-notes/01_inspect_log.txt`, `results/logs/03..05`).
+- New table in `05_train_evaluate_log.txt`: mean recall per class. Main method:
+  white Brown Spot 0.478, Leaf Scald 0.579, Rice Blast 0.795, Rice Tungro
+  0.733, Sheath Blight 0.927; field 0.400, 0.440, 0.627, 0.707, 0.677; mixed
+  0.450, 0.530, 0.749, 0.723, 0.870. Baseline: white 0.167, 0.350, 0.585, 0.483,
+  0.664; field 0.240, 0.320, 0.320, 0.520, 0.631.
+
+Meaning: the single submission file reproduces every reported number from
+scratch on the Mac in about 5 minutes. These are the final numbers for
+Section 6 unless the method changes.
