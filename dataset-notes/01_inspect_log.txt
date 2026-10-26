@@ -42,9 +42,9 @@ Images found: 1106
 == 4. Reading every image (sizes, quality statistics) ==
   200/1106 read (9 s)
   400/1106 read (17 s)
-  600/1106 read (26 s)
-  800/1106 read (35 s)
-  1000/1106 read (43 s)
+  600/1106 read (25 s)
+  800/1106 read (33 s)
+  1000/1106 read (42 s)
   Unreadable images: 0 []
 
 == 5. Image sizes per background ==
@@ -92,4 +92,4 @@ Images found: 1106
 == 8. Contact sheets ==
   Saved to Dhan-Shomadhan/_interim/inspect
 
-Done in 48 s.
+Done in 46 s.

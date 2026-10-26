@@ -194,3 +194,13 @@ Meaning: the effect cannot be measured reliably with the tools at hand. It is
 reported in 6.3 as an unquantified limitation; the fix would be splitting by
 capture sequence (keeping likely twins on the same side), which needs
 reliable twin labels the dataset does not provide.
+
+## Step 9 (26 Oct): rerun with the pinned environment (OpenCV 4.13, D20)
+
+Command: `python group24.py all` after `pip install -r requirements.txt`
+(`.venv` now has opencv_python 4.13.0.92 instead of opencv-contrib 5.0).
+- Every result CSV and dataset-notes CSV byte-identical to Step 7 (`git diff`
+  shows only timings in the logs); same chosen SVM settings in every split.
+- Times: inspect 46 s, baseline 20 s, ResNet-18 23 s, evaluate 188 s.
+
+Meaning: the pinned environment the marker will install reproduces every number.
