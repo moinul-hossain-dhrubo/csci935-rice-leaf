@@ -140,3 +140,15 @@ Alternative rejected: segmenting the leaf from the background first (better
 features, but that is an improvement to discuss in 6.3, not a baseline);
 larger HOG images (thousands more numbers for 884 training images, more
 risk of overfitting).
+
+**D14. ResNet-18 input: upright, 224 x 448 (w x h), RGB, ImageNet normalisation; 512 features from global average pooling.**
+Why: every photo is tall and narrow (about 1 : 2.1, Step 1). ResNet-18 ends in
+global average pooling, so it accepts non-square input. 224 x 448 keeps the
+leaf's shape and keeps its width at the 224-pixel scale the network was
+trained on. Weights: torchvision `ResNet18_Weights.IMAGENET1K_V1`, final
+layer replaced by identity, `eval()` mode, no gradients. Runs on MPS when
+available (device logged).
+Alternatives rejected: squashing to 224 x 224 (leaf distorted to half its
+width relative to its length, lesions squashed); centre-cropping a 224 x 224
+square (loses about half of each leaf, possibly the lesions); padding to a
+square (leaf becomes a narrow strip, fewer pixels on the disease).

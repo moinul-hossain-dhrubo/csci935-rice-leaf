@@ -298,3 +298,84 @@ images."
    about colour only and less sensitive to lighting.
 4. Features use fixed rules per image. A scaler learns a mean and spread from
    the images it sees; fitted on all images, it would learn from test images.
+
+---
+
+## L4. Stage 4 (`04_resnet_features.py`): borrowing a trained eye
+
+### The big idea: transfer learning, used as a fixed feature extractor
+Training a deep network needs many thousands of labelled images; we have
+1106. But ResNet-18 has already been trained on about 1.2 million everyday
+photos (ImageNet, 1000 classes). To get good at that, its early layers learned
+to see edges and colours, its middle layers textures and spots, its later
+layers parts and shapes. Those skills transfer to leaves. We cut off its last
+layer (the one that says "dog", "car", ...) and keep what comes just before:
+512 numbers that summarise what the network "sees" in the image. The SVM then
+learns diseases from those 512 numbers.
+Analogy: hiring an experienced art critic who has never seen rice. You do
+not teach them to see; you ask them to describe each leaf in their own
+vocabulary, and a junior clerk (the SVM) learns which descriptions mean which
+disease.
+
+### Concept 1: "frozen" and `eval()`
+Frozen means the network's weights never change: no training, so no risk of
+learning from test images, and it runs once for all 1106 images. `eval()`
+switches layers that behave differently during training (batch
+normalisation) to their fixed, inference behaviour. `torch.no_grad()` skips
+the bookkeeping needed for training, saving memory and time.
+
+### Concept 2: global average pooling, and why the input need not be square
+ResNet-18's last convolution produces 512 "maps", each showing where one
+learned pattern appears in the image. Global average pooling takes the
+average of each map: 512 numbers, whatever the image size. So instead of
+squashing the tall photo into a 224 x 224 square (leaf distorted) or cropping
+the middle square (top and bottom of the leaf lost), we feed 224 x 448 (w x h),
+which keeps the photo's shape (D14). The network was trained on 224 x 224, so
+its patterns are tuned to that scale; 224 wide keeps the leaf at a similar
+scale.
+
+### Concept 3: preparing images the way the network expects
+- **RGB, not BGR.** OpenCV reads colour as blue-green-red; the weights were
+  trained on red-green-blue. Forgetting to swap gives a network that sees
+  blue leaves. It would still run without any error: a silent failure.
+- **ImageNet normalisation.** Pixel values scaled to 0-1, then each channel has
+  the ImageNet average subtracted and is divided by its spread (mean 0.485,
+  0.456, 0.406; std 0.229, 0.224, 0.225). The network learned on images
+  prepared this way, so ours must match.
+
+### Concept 4: MPS
+On an M-series Mac, PyTorch can run on the built-in GPU through "MPS" (Metal
+Performance Shaders). The code uses MPS if available, otherwise CPU. Results
+can differ in the last decimal places between devices; that does not change
+the SVM's decisions in any meaningful way, but the device is logged.
+
+### Concept 5: downloadable weights (a brief rule)
+The brief allows pretrained models if they can be downloaded, with
+instructions. torchvision downloads `resnet18-f37072fd.pth` (about 45 MB)
+automatically the first time, into the PyTorch cache folder. The User Manual
+must say this, and say where the file goes, for a marker without internet
+during the run.
+
+### What to say in a demo
+"We used ResNet-18 pretrained on ImageNet as a fixed feature extractor: we
+removed its final classification layer and took the 512-number output of the
+global average pooling layer for each image. The network is never trained on
+our data. Images are converted to RGB, kept upright at 224 x 448 to preserve
+their shape, and normalised with the ImageNet statistics. An SVM then
+classifies these 512-number descriptions."
+
+### Check yourself
+1. Why can the network take a 224 x 448 image when it was trained on 224 x 224?
+2. What would happen, visibly, if BGR were not converted to RGB?
+3. Why does using a frozen network on all 1106 images not leak test information?
+4. Why remove the final layer instead of using ResNet-18's own 1000-class prediction?
+
+### Answers
+1. Its layers are convolutions (they slide over any size) and global average
+   pooling averages each map to one number, whatever its size.
+2. Nothing visible: no error, features still produced. Only the results would
+   be quietly worse, because red and blue are swapped (brown lesions look blue).
+3. The weights never change; each image's features depend only on that image
+   and on ImageNet, never on our labels or other images.
+4. The 1000 ImageNet classes do not include rice diseases. The layer before it
+   holds the general description, which the SVM can map to our 5 classes.
