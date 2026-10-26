@@ -1,0 +1,7 @@
+Images: 1106; features per image: 3844 (colour 64, HOG 3780)
+Image size used: 128 x 256 (w x h); HOG {'orientations': 9, 'pixels_per_cell': (16, 16), 'cells_per_block': (2, 2), 'block_norm': 'L2-Hys', 'feature_vector': True}
+Any NaN or inf: False
+Colour part: each of the 5 histograms sums to 1: True
+HOG part: min 0.000, max 0.860, mean 0.123
+Time: 20 s
+Saved Dhan-Shomadhan/_interim/features_colour_hog.npz

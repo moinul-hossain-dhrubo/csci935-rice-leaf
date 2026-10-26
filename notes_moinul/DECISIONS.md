@@ -152,3 +152,24 @@ Alternatives rejected: squashing to 224 x 224 (leaf distorted to half its
 width relative to its length, lesions squashed); centre-cropping a 224 x 224
 square (loses about half of each leaf, possibly the lesions); padding to a
 square (leaf becomes a narrow strip, fewer pixels on the disease).
+
+**D15. SVM tuning: grid search with 5-fold CV on the training part, scored by macro F1; std reported as sample std.**
+Pipeline: StandardScaler (fitted inside each fold, so on training folds only)
+then SVC. Grid: linear kernel, C in {0.001, 0.01, 0.1, 1}; RBF kernel, C in
+{1, 10, 100}, gamma in {0.25, 1, 4} x 1/n_features (1/n_features is
+scikit-learn's "scale" default for standardised features). Folds stratified by
+disease x background, shuffled with the split's seed. The best setting is
+refitted on the whole training part, then the test part is predicted once.
+Macro F1 as the tuning score because the classes are unequal (D11): it stops
+the search from favouring settings that ignore small classes.
+Mean +/- std over the 5 splits uses the sample standard deviation (ddof = 1).
+Alternative rejected: tuning by accuracy (rewards favouring large classes); a
+larger grid (more time, little expected gain; widen only if the chosen
+value sits at the edge of the grid in most splits).
+
+**D16. Results files extend the `results/README.md` contract.**
+Confusion CSVs carry a header row and a first column of class names (same
+order as the README), so they are readable by eye; `plots.py` should skip the
+first row and column. Extra files: `predictions.csv` (every test prediction),
+`best_params.csv`, `wrong_predictions.csv` (main method's mistakes per image,
+with how many of its test appearances were wrong, for Amit's A3).

@@ -1,0 +1,7 @@
+Device: mps; torch 2.14.1
+Weights: ResNet18_Weights.IMAGENET1K_V1; input 224 x 448 (w x h)
+Images: 1106; features per image: 512
+Any NaN or inf: False
+Values: min 0.000, max 8.463, mean 0.593; share of exact zeros 0.018
+Time: 23 s
+Saved Dhan-Shomadhan/_interim/features_resnet18.npz

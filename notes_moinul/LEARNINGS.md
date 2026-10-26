@@ -379,3 +379,74 @@ classifies these 512-number descriptions."
    and on ImageNet, never on our labels or other images.
 4. The 1000 ImageNet classes do not include rice diseases. The layer before it
    holds the general description, which the SVM can map to our 5 classes.
+
+---
+
+## L5. Stage 5 (`05_train_evaluate.py`): training, tuning and the exam
+
+### The big idea: tune on the homework, then sit the exam once
+The SVM has settings (which kernel, how large C and gamma) that change its
+results. Choosing them by looking at test scores would be like a student
+seeing the exam paper before revising: the score would no longer measure
+anything. So settings are chosen using the training part only, then the
+chosen model sits the test once.
+
+### Concept 1: cross-validation on the training part
+Analogy: practice exams made from your own homework. The 884 training images
+are cut into 5 "folds". Train on 4 folds, test on the 5th, rotate 5 times,
+average. Do this for every candidate setting; keep the best. Then train once
+more on all 884 with that setting. The real test images were never looked at.
+
+### Concept 2: the SVM settings
+- **Linear kernel:** the SVM draws flat boundaries between classes.
+- **RBF kernel:** boundaries can curve; **gamma** sets how wiggly (large gamma
+  = each training image's influence is very local, risks memorising).
+- **C:** how hard the SVM tries to classify every training image correctly.
+  Large C = strict (risks memorising noise); small C = relaxed (smoother
+  boundary, may underfit).
+13 combinations are tried (D15).
+
+### Concept 3: standardising, inside the folds
+The scaler makes every feature have mean 0 and spread 1, so features with big
+numbers do not dominate. It learns that mean and spread from data, so it is
+part of the pipeline: fitted on the training folds only, every time. Fitting
+it on all images first would let test images influence training (leakage).
+
+### Concept 4: one prediction, three scores
+Each test image is predicted once. Then the answers are counted three ways:
+white test images, field test images, all. That is D5 in code.
+
+### Concept 5: macro F1 versus accuracy
+Accuracy = share of test images right. If a model ignored Brown Spot
+completely, accuracy would barely drop (Brown Spot is a small class). Macro F1
+computes a score per class (balancing "when it says Brown Spot, is it right?"
+and "does it find the Brown Spot images?") and averages the 5 classes equally,
+so ignoring a class is punished.
+
+### Concept 6: the extra run (white-only training, field test)
+Same main method, but it never sees a field image during training. If the
+background does not matter, it should do about as well on field images as the
+normal model. If it collapses, the features are describing the background as
+much as the disease.
+
+### What to say in a demo
+"For each split, the SVM's kernel, C and gamma were chosen by 5-fold
+cross-validation on the training part only, scored by macro F1, with feature
+scaling fitted inside each fold. The chosen setting was retrained on the full
+training part and each test image predicted once; we then counted accuracy
+and macro F1 on the white, field and all test images."
+
+### Check yourself
+1. Why is the scaler inside the pipeline instead of applied once to all images?
+2. In one split the chosen C is 100, the largest value tried. What does that suggest?
+3. A model gets 80% accuracy but macro F1 0.55. What is probably happening?
+4. Why does each test image get predicted only once, even though it gets three scores?
+
+### Answers
+1. It learns a mean and spread; applied to all images it would learn from test
+   images. Inside the pipeline it is fitted on training folds only.
+2. The best value may lie beyond the grid; if that happens in most splits,
+   widen the grid (still using training data only).
+3. It does well on large classes and badly on one or more small ones.
+4. One model, one prediction per image; the three scenarios only choose which
+   predictions to count.
