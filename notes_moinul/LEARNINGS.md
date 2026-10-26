@@ -299,6 +299,17 @@ images."
 4. Features use fixed rules per image. A scaler learns a mean and spread from
    the images it sees; fitted on all images, it would learn from test images.
 
+### What the output showed (26 Oct, `results/logs/03_baseline_features_log.txt`)
+1. 3844 numbers per image: 64 colour, 3780 HOG, exactly as the arithmetic in
+   Concept 3 predicted (7 x 15 blocks x 36). No broken values.
+2. Each of the 5 colour histograms sums to 1: the normalisation worked, so a
+   big photo and a small photo give comparable colour shares.
+3. 21 seconds for 1106 images, thanks to reading at 1/4 resolution.
+4. Later (Step 6) these features reached only 0.473 accuracy on mixed test
+   images, about 22 points below ResNet-18. Brown Spot was found only 16.7% of
+   the time on white images: colour counts and edge directions cannot tell its
+   small spots apart from Rice Blast's.
+
 ---
 
 ## L4. Stage 4 (`04_resnet_features.py`): borrowing a trained eye
@@ -380,6 +391,14 @@ classifies these 512-number descriptions."
 4. The 1000 ImageNet classes do not include rice diseases. The layer before it
    holds the general description, which the SVM can map to our 5 classes.
 
+### What the output showed (26 Oct, `results/logs/04_resnet_features_log.txt`)
+1. `Device: mps`: the Mac's GPU did the work, 24 seconds for 1106 images.
+2. 512 numbers per image, all between 0 and 8.463, none negative. That is
+   expected: the last block ends with a ReLU (which turns negatives into 0)
+   before pooling. 1.8% are exactly 0: patterns that never fired in that image.
+3. These 512 numbers beat the 3844 hand-made ones by about 22 points: fewer
+   numbers, but far more informative ones. Quality beats quantity.
+
 ---
 
 ## L5. Stage 5 (`05_train_evaluate.py`): training, tuning and the exam
@@ -450,3 +469,23 @@ and macro F1 on the white, field and all test images."
 3. It does well on large classes and badly on one or more small ones.
 4. One model, one prediction per image; the three scenarios only choose which
    predictions to count.
+
+### What the output showed (26 Oct, `results/logs/05_train_evaluate_log.txt`)
+1. **Main method:** 0.7467 white, 0.5794 field, 0.6955 mixed (accuracy, mean
+   over 5 splits). Baseline: 0.5000, 0.4118, 0.4730. The learned features win
+   everywhere and are steadier (std 0.0164 vs 0.0394 on mixed).
+2. **Field is the hard part:** same model, 17 points lower on field images.
+3. **The chosen settings were stable:** the main method picked RBF with C = 10
+   in all 5 splits. When cross-validation keeps choosing the same thing, the
+   choice is trustworthy. The baseline first chose values at the edge of the
+   grid every time (check-yourself question 2), so the grid was widened (D17);
+   after that its choices sat inside the grid in 3 of 5 splits.
+4. **The white-only model collapsed:** it answered "Leaf Scald" for every field
+   image. RBF SVMs give one fixed answer to everything far from their training
+   data, so this says field images live in a different region of the 512-number
+   space than white ones. The features describe the background as well as the
+   disease.
+5. **Weakest classes:** Brown Spot (recall 0.478 white, 0.400 field) and Leaf
+   Scald (0.579, 0.440), confused with each other and with Rice Blast.
+6. **Reproducible:** `python group24.py all` on the Mac regenerated every result
+   file byte for byte.
