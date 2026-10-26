@@ -54,11 +54,13 @@ def log(msg=""):
 
 
 def param_grid(n_features):
-    """Linear SVM (4 values of C) and RBF SVM (3 C x 3 gamma); gamma relative to
-    1/n_features, which is sklearn's 'scale' value for standardised features."""
+    """Linear SVM (5 values of C) and RBF SVM (5 C x 4 gamma); gamma relative to
+    1/n_features, which is sklearn's 'scale' value for standardised features.
+    Widened on 26 Oct (D17): the first grid's edges were chosen in every split."""
     g = 1.0 / n_features
-    return [{"svc__kernel": ["linear"], "svc__C": [0.001, 0.01, 0.1, 1]},
-            {"svc__kernel": ["rbf"], "svc__C": [1, 10, 100], "svc__gamma": [g / 4, g, 4 * g]}]
+    return [{"svc__kernel": ["linear"], "svc__C": [0.0001, 0.001, 0.01, 0.1, 1]},
+            {"svc__kernel": ["rbf"], "svc__C": [1, 10, 100, 1000, 10000],
+             "svc__gamma": [g / 16, g / 4, g, 4 * g]}]
 
 
 def tune_and_fit(X, y, groups, seed):

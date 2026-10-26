@@ -173,3 +173,16 @@ order as the README), so they are readable by eye; `plots.py` should skip the
 first row and column. Extra files: `predictions.csv` (every test prediction),
 `best_params.csv`, `wrong_predictions.csv` (main method's mistakes per image,
 with how many of its test appearances were wrong, for Amit's A3).
+
+**D17. SVM grid widened after the first full run (training-only decision).**
+In the first run (ANALYSIS_LOG Step 5) the baseline chose C = 100 (largest
+tried) and gamma = 1/(4 x n_features) (smallest tried) in all 5 splits, so its
+best setting may lie outside the grid. New grid, used for BOTH methods:
+linear C in {0.0001, 0.001, 0.01, 0.1, 1}; RBF C in {1, 10, 100, 1000, 10000},
+gamma in {1/16, 1/4, 1, 4} x 1/n_features (25 settings).
+Why this is not tuning on the test set: the trigger was the CHOSEN settings
+(picked by cross-validation on training parts), not the test scores, and
+the grid is the same for both methods. The first run's numbers stay in
+ANALYSIS_LOG Step 5 for the record; the report uses the rerun.
+Alternative rejected: keeping the narrow grid (the baseline would look
+worse than it is, an unfair comparison).
