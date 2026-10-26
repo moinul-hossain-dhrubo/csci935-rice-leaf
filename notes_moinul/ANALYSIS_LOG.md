@@ -63,3 +63,72 @@ its recall by 10 points. 367 images are never tested, as expected for
 independent random splits (0.8^5 = 0.33 of 1106 = about 363); not a problem,
 since each split is a separate fair test. Same output on two machines confirms
 the fixed seed plus sorted file list is reproducible (D12).
+
+## Step 3 (26 Oct): baseline features
+
+Stage: `03_baseline_features.py`. Output: `Dhan-Shomadhan/_interim/features_colour_hog.npz`,
+`results/logs/03_baseline_features_log.txt`.
+- 1106 images x 3844 features (colour 64, HOG 3780); no NaN/inf; each of the 5
+  colour histograms sums to 1; HOG values 0.000 to 0.860, mean 0.123; 20 s.
+
+## Step 4 (26 Oct): ResNet-18 features
+
+Stage: `04_resnet_features.py`. Output: `Dhan-Shomadhan/_interim/features_resnet18.npz`,
+`results/logs/04_resnet_features_log.txt`.
+- Device mps, torch 2.14.1, weights IMAGENET1K_V1, input 224 x 448.
+- 1106 images x 512 features; no NaN/inf; values 0.000 to 8.463, mean 0.593;
+  share of exact zeros 0.018; 23 s.
+
+Meaning: both feature files are complete and clean. Values are never negative
+because ResNet's last block ends in a ReLU before pooling.
+
+## Step 5 (26 Oct): SVM training and evaluation, all 5 splits
+
+Stage: `05_train_evaluate.py`. Output: `results/summary.csv`, `per_class.csv`,
+`confusion_*.csv`, `predictions.csv`, `best_params.csv`, `wrong_predictions.csv`,
+`results/logs/05_train_evaluate_log.txt`. Run time 99 s.
+
+Mean +/- std over 5 splits (log, last table):
+
+| method | scenario | accuracy | macro F1 |
+|---|---|---|---|
+| colour_hog_svm | white | 0.5078 +/- 0.0424 | 0.4572 +/- 0.0460 |
+| colour_hog_svm | field | 0.4147 +/- 0.0866 | 0.4005 +/- 0.0798 |
+| colour_hog_svm | mixed | 0.4793 +/- 0.0333 | 0.4436 +/- 0.0324 |
+| resnet18_svm | white | 0.7467 +/- 0.0183 | 0.7099 +/- 0.0233 |
+| resnet18_svm | field | 0.5794 +/- 0.0472 | 0.5699 +/- 0.0602 |
+| resnet18_svm | mixed | 0.6955 +/- 0.0164 | 0.6674 +/- 0.0269 |
+| resnet18_svm_whiteonly | field | 0.2206 +/- 0.0000 | 0.0723 +/- 0.0000 |
+
+- Chosen settings (`best_params.csv`): baseline RBF, C = 100, gamma = 6.50e-05
+  (= 1/(4 x 3844)) in all 5 splits; main RBF, C = 10 in all 5 splits, gamma
+  0.001953 (= 1/512) in 4 splits and 0.000488 in 1.
+- White-only model (`confusion_resnet18_svm_whiteonly_field.csv`): predicted
+  Leaf Scald for every one of the 340 field test predictions (68 x 5); 0.2206 =
+  15/68, the share of Leaf Scald among field test images.
+- Main method, mean recall per class (`per_class.csv`, averaged over splits):
+  white: Brown Spot 0.478, Leaf Scald 0.579, Rice Blast 0.795, Rice Tungro 0.733,
+  Sheath Blight 0.927; field: 0.400, 0.440, 0.627, 0.707, 0.677.
+- Main method, white, summed confusion (`confusion_resnet18_svm_white.csv`):
+  Brown Spot 43 right, 21 as Rice Blast, 17 as Leaf Scald; Leaf Scald 81 right,
+  28 as Rice Blast, 17 as Brown Spot.
+- Main-method test images wrong at least once: 239 (white 139, field 100).
+
+Meaning:
+1. ResNet-18 features beat the hand-made baseline by about 22 points of
+   accuracy on mixed test images (0.6955 vs 0.4793), and are more stable
+   (std 0.0164 vs 0.0333).
+2. Field is clearly harder for both methods: main method white 0.7467 vs field
+   0.5794. Field std is larger (0.0472), partly because only 68 field images
+   are tested per split.
+3. The hardest classes are Brown Spot and Leaf Scald, and their main confusions
+   (Brown Spot with Rice Blast and Leaf Scald) match dataset note 2 (similar
+   spots and discolouration).
+4. White-only training collapsed to a single class on field images: field
+   features lie far from every white training image. An RBF SVM gives the same
+   answer to all points far from its training data, so the collapse shows a
+   large background shift, and the exact class it falls to (Leaf Scald) carries
+   no meaning.
+5. The baseline's C sits at the largest value tried (100) and its gamma at the
+   smallest in every split: by the D15 rule the grid should be widened, so the
+   baseline is not under-tuned.

@@ -1,0 +1,16 @@
+method,split,trained_on,kernel,C,gamma,cv_macro_f1
+colour_hog_svm,0,all_train,rbf,100,6.503642039542144e-05,0.4085
+colour_hog_svm,1,all_train,rbf,100,6.503642039542144e-05,0.4167
+colour_hog_svm,2,all_train,rbf,100,6.503642039542144e-05,0.4553
+colour_hog_svm,3,all_train,rbf,100,6.503642039542144e-05,0.432
+colour_hog_svm,4,all_train,rbf,100,6.503642039542144e-05,0.4421
+resnet18_svm,0,all_train,rbf,10,0.001953125,0.6864
+resnet18_svm_whiteonly,0,white_train,rbf,10,0.001953125,0.7238
+resnet18_svm,1,all_train,rbf,10,0.001953125,0.6737
+resnet18_svm_whiteonly,1,white_train,rbf,10,0.001953125,0.7082
+resnet18_svm,2,all_train,rbf,10,0.001953125,0.6853
+resnet18_svm_whiteonly,2,white_train,rbf,10,0.00048828125,0.737
+resnet18_svm,3,all_train,rbf,10,0.00048828125,0.676
+resnet18_svm_whiteonly,3,white_train,rbf,10,0.001953125,0.7262
+resnet18_svm,4,all_train,rbf,10,0.001953125,0.659
+resnet18_svm_whiteonly,4,white_train,rbf,10,0.00048828125,0.7117
