@@ -1,0 +1,95 @@
+== 1. Folder structure ==
+  'Field Background  '     / 'Browon Spot'      49 files
+  'Field Background  '     / 'Leaf Scaled'      74 files
+  'Field Background  '     / 'Rice Blast'       74 files
+  'Field Background  '     / 'Rice Turgro'      76 files
+  'Field Background  '     / 'Sheath Blight'    64 files
+  'White Background '      / 'Brown Spot'       90 files
+  'White Background '      / 'Leaf Scaled'      143 files
+  'White Background '      / 'Rice Blast'       198 files
+  'White Background '      / 'Rice Tungro'      119 files
+  'White Background '      / 'Shath Blight'     219 files
+Images found: 1106
+
+== 2. Label check: folder vs CSV vs file-name prefix ==
+  CSV rows: 1106
+  File names used more than once across folders: 0 []
+  Images not in CSV: 0 []
+  CSV rows with no image: 0 []
+  Folder/CSV label mismatches: 0
+  File-name prefixes per group:
+    field Brown Spot    {'bsf': 49}
+    field Leaf Scald    {'lsf': 74}
+    field Rice Blast    {'rbf': 74}
+    field Rice Tungro   {'rtf': 76}
+    field Sheath Blight {'sbf': 64}
+    white Brown Spot    {'bs_wb': 90}
+    white Leaf Scald    {'ls_wb': 143}
+    white Rice Blast    {'rb_wb': 198}
+    white Rice Tungro   {'rt_wb': 119}
+    white Sheath Blight {'sb_wb': 219}
+  Images whose prefix differs from the rest of their folder: 0 []
+
+== 3. Counts per disease x background ==
+  disease          white   field   total
+  Brown Spot          90      49     139
+  Leaf Scald         143      74     217
+  Rice Blast         198      74     272
+  Rice Tungro        119      76     195
+  Sheath Blight      219      64     283
+  Total              769     337    1106
+
+== 4. Reading every image (sizes, quality statistics, hashes) ==
+  200/1106 read (9 s)
+  400/1106 read (17 s)
+  600/1106 read (25 s)
+  800/1106 read (34 s)
+  1000/1106 read (42 s)
+  Unreadable images: 0 []
+
+== 5. Image sizes per background ==
+  white: n=769 width 1952 to 1952 (median 1952), height 4160 to 4160 (median 4160), portrait 769, landscape 0, square 0
+     most common sizes (w x h): [((1952, 4160), 769)]
+  field: n=337 width 1536 to 4160 (median 1952), height 1952 to 4160 (median 4160), portrait 326, landscape 11, square 0
+     most common sizes (w x h): [((1952, 4160), 320), ((4160, 1952), 11), ((1536, 3264), 6)]
+
+== 6. Quality statistics (median [min, max]) per background ==
+  white: brightness 159 [133, 191]; contrast 34.1 [14.3, 54.7]; sharpness 84.3 [21.6, 258]; white_frac 0.248 [0, 0.877]; green_frac 0.058 [0, 0.245]
+  field: brightness 141 [99.8, 172]; contrast 46.9 [28.3, 61]; sharpness 1.06e+03 [55.8, 4.57e+03]; white_frac 0.006 [0, 0.151]; green_frac 0.62 [0.059, 0.978]
+  (brightness = mean HSV value 0-255; sharpness = Laplacian variance at 512px, higher = sharper; white_frac / green_frac = share of near-white / green pixels)
+
+== 7. Duplicate and most similar images ==
+  Exact duplicate groups (same bytes): 0 []
+  Pairs with thumbnail correlation >= 0.98: 0
+  Highest correlation of any pair: 0.976
+  12 most similar white pairs (correlation, files, labels):
+    0.976  rb_wb_108.jpg (Rice Blast)  ~  rb_wb_99.jpg (Rice Blast)
+    0.975  rt_wb_42.jpg (Rice Tungro)  ~  rt_wb_52.jpg (Rice Tungro)
+    0.975  ls_wb_59.jpg (Leaf Scald)  ~  rt_wb_69.jpg (Rice Tungro)
+    0.973  sb_wb_56.jpg (Sheath Blight)  ~  sb_wb_60.jpg (Sheath Blight)
+    0.973  rb_wb_188.jpg (Rice Blast)  ~  rt_wb_115.jpg (Rice Tungro)
+    0.973  rb_wb_108.jpg (Rice Blast)  ~  rb_wb_156.jpg (Rice Blast)
+    0.972  rb_wb_35.jpg (Rice Blast)  ~  rb_wb_38.jpg (Rice Blast)
+    0.972  rb_wb_115.jpg (Rice Blast)  ~  rb_wb_127.jpg (Rice Blast)
+    0.972  rb_wb_176.jpg (Rice Blast)  ~  rb_wb_188.jpg (Rice Blast)
+    0.970  bs_wb_22.jpg (Brown Spot)  ~  rt_wb_17.jpg (Rice Tungro)
+    0.969  rb_wb_153.jpg (Rice Blast)  ~  rb_wb_167.jpg (Rice Blast)
+    0.969  ls_wb_137.jpg (Leaf Scald)  ~  rb_wb_191.jpg (Rice Blast)
+  12 most similar field pairs (correlation, files, labels):
+    0.907  rtf_17.jpg (Rice Tungro)  ~  rtf_18.jpg (Rice Tungro)
+    0.858  rtf_32.jpg (Rice Tungro)  ~  rtf_33.jpg (Rice Tungro)
+    0.832  rbf_21.jpg (Rice Blast)  ~  rbf_22.jpg (Rice Blast)
+    0.828  rtf_22.jpg (Rice Tungro)  ~  rtf_23.jpg (Rice Tungro)
+    0.805  rtf_5.jpg (Rice Tungro)  ~  rtf_6.jpg (Rice Tungro)
+    0.773  lsf_50.jpg (Leaf Scald)  ~  sbf_56.jpg (Sheath Blight)
+    0.764  sbf_27.jpg (Sheath Blight)  ~  sbf_56.jpg (Sheath Blight)
+    0.758  bsf_20.jpg (Brown Spot)  ~  rtf_71.jpg (Rice Tungro)
+    0.752  bsf_20.jpg (Brown Spot)  ~  sbf_56.jpg (Sheath Blight)
+    0.751  bsf_4.jpg (Brown Spot)  ~  bsf_5.jpg (Brown Spot)
+    0.750  lsf_13.jpg (Leaf Scald)  ~  sbf_27.jpg (Sheath Blight)
+    0.747  bsf_20.jpg (Brown Spot)  ~  rtf_45.jpg (Rice Tungro)
+
+== 8. Contact sheets ==
+  Saved to Dhan-Shomadhan/_interim/inspect
+
+Done in 48 s.

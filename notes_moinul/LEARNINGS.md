@@ -115,5 +115,20 @@ of field photos of the same leaf taken seconds apart."
 5. About 10 (20% of 49). One wrong image moves that class's recall by about
    10 percentage points, so it swings a lot between splits.
 
-### What the output showed
-(To be written after the run on the Mac, from `dataset-notes/01_inspect_log.txt`.)
+### What the output showed (26 Oct, `dataset-notes/01_inspect_log.txt`)
+1. **Labels are clean.** All three sources agree for all 1106 images, so the
+   misspelled folders were mapped correctly. Nothing to fix.
+2. **The groups are very unequal:** from 49 (Field Brown Spot) to 219 (White
+   Sheath Blight). With an 80/20 split, Field Brown Spot has about 10 test
+   images per split, so its score will jump around between splits.
+3. **Every white image has exactly the same size** (1952 x 4160), field images
+   come in 3 sizes and 11 are sideways. Same camera setup for white, more
+   casual shooting in the field.
+4. **Sharpness, read correctly:** white median 84.3, field median about 1060.
+   This is the check-yourself question 2 trap: the white numbers are low
+   because plain paper has no edges, not because the photos are blurry.
+5. **Green share is the clearest difference between backgrounds:** median 0.058
+   white vs 0.62 field. In the field the diseased leaf competes with lots of
+   healthy green around it.
+6. **No copied files, but some field leaves were photographed twice**
+   (`rtf_17` / `rtf_18`). Worth measuring later with better features.

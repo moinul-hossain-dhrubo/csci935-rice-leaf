@@ -1,0 +1,25 @@
+background,correlation,file_a,disease_a,file_b,disease_b
+white,0.976,rb_wb_108.jpg,Rice Blast,rb_wb_99.jpg,Rice Blast
+white,0.975,rt_wb_42.jpg,Rice Tungro,rt_wb_52.jpg,Rice Tungro
+white,0.975,ls_wb_59.jpg,Leaf Scald,rt_wb_69.jpg,Rice Tungro
+white,0.973,sb_wb_56.jpg,Sheath Blight,sb_wb_60.jpg,Sheath Blight
+white,0.973,rb_wb_188.jpg,Rice Blast,rt_wb_115.jpg,Rice Tungro
+white,0.973,rb_wb_108.jpg,Rice Blast,rb_wb_156.jpg,Rice Blast
+white,0.972,rb_wb_35.jpg,Rice Blast,rb_wb_38.jpg,Rice Blast
+white,0.972,rb_wb_115.jpg,Rice Blast,rb_wb_127.jpg,Rice Blast
+white,0.972,rb_wb_176.jpg,Rice Blast,rb_wb_188.jpg,Rice Blast
+white,0.97,bs_wb_22.jpg,Brown Spot,rt_wb_17.jpg,Rice Tungro
+white,0.969,rb_wb_153.jpg,Rice Blast,rb_wb_167.jpg,Rice Blast
+white,0.969,ls_wb_137.jpg,Leaf Scald,rb_wb_191.jpg,Rice Blast
+field,0.907,rtf_17.jpg,Rice Tungro,rtf_18.jpg,Rice Tungro
+field,0.858,rtf_32.jpg,Rice Tungro,rtf_33.jpg,Rice Tungro
+field,0.832,rbf_21.jpg,Rice Blast,rbf_22.jpg,Rice Blast
+field,0.828,rtf_22.jpg,Rice Tungro,rtf_23.jpg,Rice Tungro
+field,0.805,rtf_5.jpg,Rice Tungro,rtf_6.jpg,Rice Tungro
+field,0.773,lsf_50.jpg,Leaf Scald,sbf_56.jpg,Sheath Blight
+field,0.764,sbf_27.jpg,Sheath Blight,sbf_56.jpg,Sheath Blight
+field,0.758,bsf_20.jpg,Brown Spot,rtf_71.jpg,Rice Tungro
+field,0.752,bsf_20.jpg,Brown Spot,sbf_56.jpg,Sheath Blight
+field,0.751,bsf_4.jpg,Brown Spot,bsf_5.jpg,Brown Spot
+field,0.75,lsf_13.jpg,Leaf Scald,sbf_27.jpg,Sheath Blight
+field,0.747,bsf_20.jpg,Brown Spot,rtf_45.jpg,Rice Tungro
