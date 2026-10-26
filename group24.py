@@ -1,4 +1,4 @@
-"""Rice leaf disease classification on the Dhan-Shomadhan dataset (CSCI935/435 group project).
+"""Rice leaf disease classification on the Dhan-Shomadhan dataset (CSCI935/435 group project, Group 24).
 
 Method: frozen pretrained ResNet-18 (ImageNet) features + SVM.
 Baseline: colour histograms (HSV, YCrCb) + HOG features + SVM.
@@ -6,12 +6,12 @@ Evaluation: 5 seeded, stratified 80/20 splits; each model is tested on the
 white-background, field-background and all (mixed) test images.
 
 Run from the folder that contains the dataset folder Dhan-Shomadhan/:
-    python group_name.py all          run every stage below in order
-    python group_name.py inspect      stage 1: dataset checks and statistics
-    python group_name.py splits       stage 2: the 5 train/test splits
-    python group_name.py baseline     stage 3: colour + HOG features
-    python group_name.py resnet       stage 4: ResNet-18 features
-    python group_name.py evaluate     stage 5: tune, train, test, write results
+    python group24.py all          run every stage below in order
+    python group24.py inspect      stage 1: dataset checks and statistics
+    python group24.py splits       stage 2: the 5 train/test splits
+    python group24.py baseline     stage 3: colour + HOG features
+    python group24.py resnet       stage 4: ResNet-18 features
+    python group24.py evaluate     stage 5: tune, train, test, write results
 Optional: --data PATH (dataset folder, default Dhan-Shomadhan),
           --splits 0 1 ... (evaluate only some splits).
 
@@ -160,7 +160,7 @@ def read_label_csv(P):
 
 def load_splits(P):
     if not P.splits.exists():
-        raise FileNotFoundError(f"{P.splits} not found. Run: python group_name.py splits")
+        raise FileNotFoundError(f"{P.splits} not found. Run: python group24.py splits")
     paths = {(r["file"], r["background"], r["disease"]): r["path"] for r in list_images(P)}
     rows = []
     with open(P.splits, newline="") as fh:

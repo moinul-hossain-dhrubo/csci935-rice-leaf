@@ -29,3 +29,12 @@ Never delete or rename other people's files. Do not upload the dataset.
 pip install -r requirements.txt
 ```
 Place the dataset at `./Dhan-Shomadhan/` (ignored by git).
+
+## Running the code
+Run from this folder (the one containing `Dhan-Shomadhan/`):
+```
+python group24.py all        # every stage: inspect, splits, baseline, resnet, evaluate
+python group24.py evaluate   # or one stage at a time
+```
+Results go to `results/`, dataset statistics to `dataset-notes/`, interim data to
+`Dhan-Shomadhan/_interim/`. Submission: `group24.zip` containing `group24.py` and `group24.pdf` only.

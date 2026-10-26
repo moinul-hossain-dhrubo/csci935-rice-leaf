@@ -72,12 +72,12 @@ which all tables and figures in Section 6 are produced.
 On a 16 GB M-series MacBook the modules took 48 s (M1), 1 s (M2), 20 s (M3),
 23 s (M4, Apple GPU) and 186 s (M5, all splits)
 (`dataset-notes/01_inspect_log.txt`, `results/logs/02..05`; to update from the
-final `group_name.py all` run).
+final `group24.py all` run).
 
 ## 6 Experimental Results and Analysis (2 pages)
 
 Draft of 26 Oct from the Step 6 run (`results/`); numbers to be re-checked
-against the final `group_name.py all` run. Budget: 2 pages = Table 1 + Figure
+against the final `group24.py all` run. Budget: 2 pages = Table 1 + Figure
 (confusion matrices, 6 cm) + Figure (failure strip, 6 cm) + about 550 words.
 
 ### 6.1 Experimental Settings
@@ -175,7 +175,7 @@ penalises Brown Spot.
 
 ## Appendix b) Running the code (1 page; draft, to combine with Sabir's install page)
 
-1. **Place the files.** Put `group_name.py` in a folder, and the unzipped
+1. **Place the files.** Put `group24.py` in a folder, and the unzipped
    dataset folder `Dhan-Shomadhan` (exactly as supplied, folder names unchanged)
    in the same folder.
 2. **Open a terminal in that folder** and activate the environment from part a).
@@ -188,7 +188,7 @@ penalises Brown Spot.
    `C:\Users\<your name>\.cache\torch\hub\checkpoints\` (create the folders
    if needed).
 4. **Run everything** (about N minutes in total on a 2024 MacBook):
-   `python group_name.py all`
+   `python group24.py all`
    Or one stage at a time, in this order: `inspect`, `splits`, `baseline`,
    `resnet`, `evaluate`.
 5. **Find the results.**
@@ -208,4 +208,4 @@ sorted file list. Deep features computed on a different device (CPU instead
 of the Apple GPU) can differ in the last decimal places, which may change an
 occasional prediction. (To confirm with Akram's clean-machine test, which runs
 on a different computer.)
-To rerun only the classifier on some splits: `python group_name.py evaluate --splits 0 1`.
+To rerun only the classifier on some splits: `python group24.py evaluate --splits 0 1`.

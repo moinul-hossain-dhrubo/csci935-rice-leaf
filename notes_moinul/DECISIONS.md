@@ -196,3 +196,7 @@ splits file byte-identical, baseline features identical (max difference 0.0)
 and split-0 main-method results identical to the stage files.
 Akram's `plots.py` is merged on Tue when it arrives. Renamed to the real
 group name once known.
+
+**D19. Group name: Group 24 (Moodle). Submission files `group24.py`, `group24.pdf`, `group24.zip`.**
+Lowercase, no spaces, so the marker can type it on any system. `group_name.py`
+renamed to `group24.py` (git history kept); README gained the run commands.
