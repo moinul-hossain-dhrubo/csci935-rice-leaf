@@ -12,6 +12,7 @@ Run from the folder that contains the dataset folder Dhan-Shomadhan/:
     python group24.py baseline     stage 3: colour + HOG features
     python group24.py resnet       stage 4: ResNet-18 features
     python group24.py evaluate     stage 5: tune, train, test, write results
+    python group24.py plots        stage 6: report figures (results/figures/)
 Optional: --data PATH (dataset folder, default Dhan-Shomadhan),
           --splits 0 1 ... (evaluate only some splits).
 
@@ -642,11 +643,160 @@ def stage_evaluate(P, split_ids):
 
 
 # ===========================================================================
+# Stage 6: report figures (based on Akram's plots.py, merged 27 Oct)
+# ===========================================================================
+# Images for the figures are named here and read straight from the dataset
+# folder, so the figures can be rebuilt from the submission alone.
+# Sample grid (Section 3): one white and one field image per disease, Amit's A1 picks.
+SAMPLE_FILES = {  # (disease, background) -> dataset file name; fill from figures/samples/originals.txt
+}
+# Failure strip (Section 6.3): 3 white then 3 field misclassified images, Amit's A3 picks.
+FAILURE_FILES = [  # dataset file names; fill from figures/failures/failures.txt
+]
+FIG_CM = 1 / 2.54
+FIG_WIDTH = 18 * FIG_CM                  # full text width
+FIG_FONT_PT = 9
+FIG_DPI = 300
+
+
+def _fig_setup():
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    plt.rcParams.update({
+        "font.family": "sans-serif",
+        "font.sans-serif": ["Arial", "Helvetica", "Liberation Sans", "DejaVu Sans"],
+        "font.size": FIG_FONT_PT, "axes.labelsize": FIG_FONT_PT,
+        "xtick.labelsize": FIG_FONT_PT, "ytick.labelsize": FIG_FONT_PT, "savefig.dpi": FIG_DPI,
+    })
+    return plt
+
+
+def _fig_save(plt, fig, name):
+    out = RESULTS_DIR / "figures"
+    out.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out / name, dpi=FIG_DPI)     # no bbox_inches="tight": keeps the exact size
+    plt.close(fig)
+    print(f"Saved {out / name}")
+
+
+def _fig_image(path, aspect):
+    """Read with OpenCV (RGB), turn to match the tile shape, centre-crop to width/height = aspect."""
+    img = cv2.cvtColor(resize_longest(cv2.imread(str(path)), 800), cv2.COLOR_BGR2RGB)
+    if (img.shape[1] >= img.shape[0]) != (aspect >= 1):
+        img = np.rot90(img)
+    h, w = img.shape[:2]
+    if w / h > aspect:
+        nw = int(round(h * aspect)); x0 = (w - nw) // 2
+        return img[:, x0:x0 + nw]
+    nh = int(round(w / aspect)); y0 = (h - nh) // 2
+    return img[y0:y0 + nh, :]
+
+
+def plot_confusion_matrices(plt, method=MAIN):
+    """3 panels (white, field, mixed); colour = share of the true class, number = count."""
+    mats = []
+    for scen in SCENARIOS:
+        with open(RESULTS_DIR / f"confusion_{method}_{scen}.csv", newline="") as fh:
+            rows = list(csv.reader(fh))
+        if [h.strip() for h in rows[0][1:]] != CLASSES:
+            raise ValueError(f"Unexpected class order in confusion_{method}_{scen}.csv")
+        mats.append(np.array([[int(v) for v in r[1:]] for r in rows[1:] if r]))
+    wrap = lambda name: name.replace(" ", "\n")
+    fig = plt.figure(figsize=(FIG_WIDTH, 6 * FIG_CM))
+    left, right, bottom, top, gap = 0.085, 0.905, 0.255, 0.91, 0.012
+    pw = (right - left - 2 * gap) / 3
+    axes = [fig.add_axes([left + i * (pw + gap), bottom, pw, top - bottom]) for i in range(3)]
+    cax = fig.add_axes([right + 0.02, bottom, 0.012, top - bottom])
+    ticks = np.arange(len(CLASSES))
+    for i, (ax, m, label) in enumerate(zip(axes, mats, ["(a) White", "(b) Field", "(c) Mixed"])):
+        frac = m / m.sum(axis=1, keepdims=True)
+        im = ax.imshow(frac, cmap="Blues", vmin=0, vmax=1, aspect="auto")
+        for r in range(m.shape[0]):
+            for c in range(m.shape[1]):
+                ax.text(c, r, str(m[r, c]), ha="center", va="center", fontsize=FIG_FONT_PT,
+                        color="white" if frac[r, c] > 0.55 else "black")
+        ax.set_xticks(ticks)
+        ax.set_xticklabels([wrap(c) for c in CLASSES], rotation=90, linespacing=0.9, va="top", ha="center")
+        ax.set_yticks(ticks)
+        ax.tick_params(length=0, pad=2)
+        ax.set_yticklabels([wrap(c) for c in CLASSES] if i == 0 else [], linespacing=0.9)
+        ax.text(0.5, 1.02, label, transform=ax.transAxes, ha="center", va="bottom")
+    axes[1].set_xlabel("Predicted class", labelpad=1)
+    fig.text(0.004, (bottom + top) / 2, "True class", rotation=90, va="center", ha="left")
+    cb = fig.colorbar(im, cax=cax)
+    cb.set_label("Fraction of true class", labelpad=3)
+    cb.set_ticks([0, 0.5, 1])
+    _fig_save(plt, fig, "confusion.png")
+
+
+def plot_sample_grid(plt, P):
+    """2 x 5 grid: top row white background, bottom row field, one column per disease."""
+    by_name = {(r["file"], r["background"]): r["path"] for r in list_images(P)}
+    fig_h = 6 * FIG_CM
+    left, right, bottom, top, gx, gy = 0.045, 0.998, 0.01, 0.92, 0.006, 0.02
+    tw, th = (right - left - 4 * gx) / 5, (top - bottom - gy) / 2
+    aspect = (tw * FIG_WIDTH) / (th * fig_h)
+    fig = plt.figure(figsize=(FIG_WIDTH, fig_h))
+    for r, (bg, row_label) in enumerate([("white", "White"), ("field", "Field")]):
+        y0 = top - (r + 1) * th - r * gy
+        for c, disease in enumerate(CLASSES):
+            ax = fig.add_axes([left + c * (tw + gx), y0, tw, th])
+            ax.imshow(_fig_image(by_name[(SAMPLE_FILES[(disease, bg)], bg)], aspect))
+            ax.set_xticks([]); ax.set_yticks([])
+            if r == 0:
+                ax.set_title(disease, fontsize=FIG_FONT_PT, pad=3)
+            if c == 0:
+                ax.set_ylabel(row_label, fontsize=FIG_FONT_PT, labelpad=3)
+    _fig_save(plt, fig, "samples.png")
+
+
+def plot_failures(plt, P):
+    """Strip of 6 misclassified images (3 white, 3 field), labelled true / predicted."""
+    with open(RESULTS_DIR / "wrong_predictions.csv", newline="") as fh:
+        lookup = {row["file"]: row for row in csv.DictReader(fh)}
+    paths = {r["file"]: r["path"] for r in list_images(P)}
+    rows = [lookup[f] for f in FAILURE_FILES]
+    fig_h = 5.5 * FIG_CM
+    left, right, bottom, top, gap = 0.002, 0.998, 0.25, 0.995, 0.012
+    tw, th = (right - left - 5 * gap) / 6, top - bottom
+    aspect = (tw * FIG_WIDTH) / (th * fig_h)
+
+    def label(true, pred, max_chars=17):
+        out = []
+        for k, v in (("true", true), ("pred", pred)):
+            line = f"{k}: {v}"
+            out.append(line if len(line) <= max_chars else f"{k}:\n{v}")
+        return "\n".join(out)
+
+    fig = plt.figure(figsize=(FIG_WIDTH, fig_h))
+    for i, row in enumerate(rows):
+        ax = fig.add_axes([left + i * (tw + gap), bottom, tw, th])
+        ax.imshow(_fig_image(paths[row["file"]], aspect))
+        ax.set_xticks([]); ax.set_yticks([])
+        ax.set_xlabel(label(row["true"], row["predicted"]), fontsize=FIG_FONT_PT, labelpad=2, linespacing=1.0)
+    _fig_save(plt, fig, "failures.png")
+
+
+def stage_plots(P):
+    plt = _fig_setup()
+    plot_confusion_matrices(plt)
+    if len(SAMPLE_FILES) == 10:
+        plot_sample_grid(plt, P)
+    else:
+        print("Sample grid skipped: SAMPLE_FILES not filled in yet.")
+    if len(FAILURE_FILES) == 6:
+        plot_failures(plt, P)
+    else:
+        print("Failure strip skipped: FAILURE_FILES not filled in yet.")
+
+
+# ===========================================================================
 # Command line
 # ===========================================================================
 def main():
     ap = argparse.ArgumentParser(description="Rice leaf disease classification (Dhan-Shomadhan).")
-    ap.add_argument("stage", choices=["all", "inspect", "splits", "baseline", "resnet", "evaluate"])
+    ap.add_argument("stage", choices=["all", "inspect", "splits", "baseline", "resnet", "evaluate", "plots"])
     ap.add_argument("--data", default="Dhan-Shomadhan", help="dataset folder (default: Dhan-Shomadhan)")
     ap.add_argument("--splits", type=int, nargs="+", default=list(range(len(SEEDS))),
                     help="splits to evaluate (default: all 5)")
@@ -663,6 +813,8 @@ def main():
         stage_resnet_features(P)
     if args.stage in ("all", "evaluate"):
         stage_evaluate(P, args.splits)
+    if args.stage in ("all", "plots"):
+        stage_plots(P)
     print(f"\nFinished '{args.stage}' in {time.time() - t0:.0f} s.")
 
 

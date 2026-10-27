@@ -213,3 +213,17 @@ torchvision is required for the ResNet-18 model and weights; it is part of the
 PyTorch project, and the User Manual states it explicitly.
 Alternative rejected: unpinned packages (a future release could change results
 or break the code on the marker's machine).
+
+**D21. Akram's `plots.py` merged into `group24.py` as stage 6 (`plots`); figure images named in the code and read from the dataset folder.**
+Layout, sizes and styling kept exactly as Akram wrote them (18 cm wide, at most
+6 cm tall, 9 pt, no titles; confusion colour = share of the true class, number =
+count). Change: the sample grid and failure strip no longer read the repo
+folders `figures/samples/` and `figures/failures/`, which are not in the
+submission zip; instead `SAMPLE_FILES` (10 names, from Amit's
+`originals.txt`) and `FAILURE_FILES` (6 names, from Amit's `failures.txt`)
+list the dataset files, read straight from `Dhan-Shomadhan/`. Until those
+lists are filled, the two figures are skipped with a message, so
+`python group24.py all` never crashes on the marker's machine. Images are read
+with OpenCV instead of matplotlib's reader (same pixels, one fewer dependency
+path). Tested in the sandbox with temporary example picks: all three figures
+render correctly. `plots.py` stays in the repo as Akram's original.
