@@ -1,0 +1,10 @@
+brownspot_white.jpg = bs_wb_64.jpg
+brownspot_field.jpg = bsf_14.jpg
+leafscald_white.jpg = ls_wb_101.jpg
+leafscald_field.jpg = lsf_31.jpg
+riceblast_white.jpg = rb_wb_113.jpg
+riceblast_field.jpg = rbf_21.jpg
+tungro_white.jpg = rt_wb_34.jpg
+tungro_field.jpg = rtf_54.jpg
+sheathblight_white.jpg = sb_wb_93.jpg
+sheathblight_field.jpg = sbf_45.jpg
