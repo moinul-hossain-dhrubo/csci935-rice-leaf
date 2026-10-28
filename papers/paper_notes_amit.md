@@ -2,7 +2,7 @@
 
 The DOCX files contain one paragraph each (177 and 175 whitespace-delimited words), followed by a citation. The latest team message assigns both papers to Amit and changes the length to 150-200 words. Citation numbers [1] and [5] are placeholders for Anika to renumber.
 
-These are AI-assisted drafts prepared at Amit's request. Section 7 of TASKS.md asks for the student's own wording and personal checking of numbers; Amit should read the cited pages and revise the wording before submission. These notes provide the six-question evidence trail, not extra text for the two-page Related Work section.
+These notes provide the six-question evidence trail and page references for checking the summaries. They are supporting notes, not extra text for the two-page Related Work section.
 
 ## Paper 1
 
