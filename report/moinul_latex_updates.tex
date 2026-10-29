@@ -140,3 +140,27 @@ decimal places.
 \item ``No module named \ldots'': the environment is not active; repeat step 5.
 \item Weight download fails: check the internet connection, or place the weights file manually (part a).
 \end{itemize}
+
+
+% --------------------------------------------------------------------------
+% (3) Small accuracy fixes found in the full read-through (29 Oct)
+% --------------------------------------------------------------------------
+
+% (3a) Section 5.2: DELETE the red note "Moinul: please check this is still
+%      accurate after your review".
+
+% (3b) Algorithm 1, line 2: the code reports mismatches, it does not stop on
+%      them (it stops only on an unknown folder name). Replace line 2 with:
+%   Check each label against the CSV and the file-name prefix; report any mismatch
+
+% (3c) Section 6.3, "Challenging Cases": the distance of field features from
+%      white ones was not measured, so state it as an inference. Replace
+%      "The field features lay far from all white training examples, so the RBF
+%       SVM had no basis to separate them." with:
+This suggests the field features lie far from all white training examples,
+where an RBF SVM gives the same answer to every input.
+
+% (3d) Section 6.1, "Hyperparameters" (the brief asks for ALL values): after
+%      "RBF, C = 100 (4 splits) or 1000 (1 split) for the baseline" add
+%      (check that page 8 still fits; if not, shorten the Table 2 caption):
+, with gamma = $1/(4 \times 3844)$ (3 splits) or $1/(16 \times 3844)$ (2 splits)
