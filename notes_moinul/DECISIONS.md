@@ -227,3 +227,14 @@ lists are filled, the two figures are skipped with a message, so
 with OpenCV instead of matplotlib's reader (same pixels, one fewer dependency
 path). Tested in the sandbox with temporary example picks: all three figures
 render correctly. `plots.py` stays in the repo as Akram's original.
+
+**D22. User Manual installs packages by name and version, not from `requirements.txt`; figure image lists filled.**
+The marker receives only `group24.zip` (`group24.py` + `group24.pdf`), so the
+manual cannot rely on `requirements.txt` or the repository: step 6 is one
+`pip install` line with every package and version (D20). Sabir's install page
+(S2) kept otherwise: Python 3.12 link, Mac/Windows table, `pip check`, weights
+location, common problems. Combined with the run part into
+`docs/user_manual.docx` (2 pages at 10.5 pt). `SAMPLE_FILES` and
+`FAILURE_FILES` in `group24.py` filled from Amit's `originals.txt` and
+`failures.txt`; `python group24.py plots` rebuilds all three figures from the
+dataset alone (tested in the sandbox).

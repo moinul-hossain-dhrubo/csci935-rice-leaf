@@ -648,10 +648,16 @@ def stage_evaluate(P, split_ids):
 # Images for the figures are named here and read straight from the dataset
 # folder, so the figures can be rebuilt from the submission alone.
 # Sample grid (Section 3): one white and one field image per disease, Amit's A1 picks.
-SAMPLE_FILES = {  # (disease, background) -> dataset file name; fill from figures/samples/originals.txt
+SAMPLE_FILES = {  # (disease, background) -> dataset file name, from figures/samples/originals.txt (Amit, A1)
+    ("Brown Spot", "white"): "bs_wb_64.jpg",     ("Brown Spot", "field"): "bsf_14.jpg",
+    ("Leaf Scald", "white"): "ls_wb_101.jpg",    ("Leaf Scald", "field"): "lsf_31.jpg",
+    ("Rice Blast", "white"): "rb_wb_113.jpg",    ("Rice Blast", "field"): "rbf_21.jpg",
+    ("Rice Tungro", "white"): "rt_wb_34.jpg",    ("Rice Tungro", "field"): "rtf_54.jpg",
+    ("Sheath Blight", "white"): "sb_wb_93.jpg",  ("Sheath Blight", "field"): "sbf_45.jpg",
 }
 # Failure strip (Section 6.3): 3 white then 3 field misclassified images, Amit's A3 picks.
-FAILURE_FILES = [  # dataset file names; fill from figures/failures/failures.txt
+FAILURE_FILES = [  # from figures/failures/failures.txt (Amit, A3): 3 white, then 3 field
+    "bs_wb_73.jpg", "ls_wb_133.jpg", "rb_wb_66.jpg", "bsf_17.jpg", "lsf_10.jpg", "rbf_29.jpg",
 ]
 FIG_CM = 1 / 2.54
 FIG_WIDTH = 18 * FIG_CM                  # full text width
