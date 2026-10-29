@@ -1,0 +1,142 @@
+% ==========================================================================
+% Moinul's LaTeX updates for the Group 24 report (29 Oct).
+% Needs \usepackage{url} (already loaded if the report uses hyperref).
+% Otherwise standard commands only: \texttt, tabular, itemize, enumerate, verbatim.
+% Underscores inside \texttt are escaped as \_ .
+% ==========================================================================
+
+% --------------------------------------------------------------------------
+% (1) Section 5.2: replace the first paragraph, ADD M6 after M5, and replace
+%     the timing sentence at the end. M1 to M5 stay as they are.
+% --------------------------------------------------------------------------
+
+The method is implemented as a single Python 3.12 program organised in six
+modules, run in order from one command (Appendix). It uses NumPy, OpenCV,
+scikit-image, scikit-learn, PyTorch with torchvision, and matplotlib. Every
+intermediate result is saved under the dataset folder
+(\texttt{Dhan-Shomadhan/\_interim/}), so each module can be rerun on its own.
+
+% ... M1 to M5 unchanged ...
+
+\textbf{M6: Figures.} It draws Figures 1, 3 and 4 from the result files with
+matplotlib, at full text width and at most 6~cm tall. The sample and failure
+images are named in the program and read directly from the dataset folder, so
+every figure can be rebuilt from the submission alone.
+
+On a 16~GB M-series MacBook the modules took 46~s (M1), about 1~s (M2),
+20~s (M3), 23~s (M4, Apple GPU) and 188~s (M5, all splits), and a few seconds
+for M6: about 5 minutes in total.
+
+
+% --------------------------------------------------------------------------
+% (2) Appendix: replace ALL of Section 8 (parts a and b) with this.
+%     Fits in 2 pages at 12 pt; check after compiling.
+% --------------------------------------------------------------------------
+
+\section{Appendix: User Manual}
+
+\subsection*{a) Packages and Installation}
+
+\begin{enumerate}
+\item Install Python 3.12 from
+\url{https://www.python.org/downloads/release/python-31210/} (3.12.10 is the
+last 3.12 release with installers; our results were produced with 3.12.12). On
+Windows, tick ``Add python.exe to PATH''.
+\item Create an empty folder. Put \texttt{group24.py} (from
+\texttt{group24.zip}) in it, and the unzipped dataset folder
+\texttt{Dhan-Shomadhan} next to it, exactly as supplied (do not rename or move
+its subfolders).
+\end{enumerate}
+
+\noindent Steps 3 to 7 are typed in a terminal:
+
+\begin{center}
+\small
+\begin{tabular}{|>{\raggedright}p{2.6cm}|p{5.2cm}|p{5.6cm}|}
+\hline
+\textbf{Step} & \textbf{macOS Terminal} & \textbf{Windows Command Prompt} \\ \hline
+3. Open the folder & \texttt{cd "/path/to/folder"} & \texttt{cd /d "C:\textbackslash folder"} \\ \hline
+4. Create environment & \texttt{python3.12 -m venv venv} & \texttt{py -3.12 -m venv venv} \\ \hline
+5. Activate it & \texttt{source venv/bin/activate} & \texttt{venv\textbackslash Scripts\textbackslash activate.bat} \\ \hline
+6. Install packages & \multicolumn{2}{l|}{the command below (same on both)} \\ \hline
+7. Check & \texttt{python -m pip check} & \texttt{python -m pip check} \\ \hline
+\end{tabular}
+\end{center}
+
+\noindent Step 6, typed as ONE line (the exact versions used for our results):
+{\small
+\begin{verbatim}
+python -m pip install numpy==2.5.4 matplotlib==3.11.2 opencv-python==4.13.0.92
+  scikit-learn==1.9.1 scikit-image==0.26.0 torch==2.14.1 torchvision==0.29.1
+\end{verbatim}}
+
+\noindent Step 7 should print ``No broken requirements found''. torchvision is
+part of the PyTorch project and provides the ResNet-18 model.
+
+\paragraph{Pre-trained weights.} The ResNet-18 ImageNet weights
+(\texttt{resnet18-f37072fd.pth}, about 45~MB) download automatically the first
+time the code runs, so internet is needed for installation and the first run.
+Without internet on that computer, download
+\url{https://download.pytorch.org/models/resnet18-f37072fd.pth} elsewhere and
+place it in \url{~/.cache/torch/hub/checkpoints/} (macOS/Linux) or
+\url{%USERPROFILE%\.cache\torch\hub\checkpoints\} (Windows),
+creating the folders if needed.
+
+\subsection*{b) Running the Code to Reproduce the Results}
+
+\begin{enumerate}
+\setcounter{enumi}{7}
+\item With the environment active and the terminal in the folder from step 2
+(the folder containing \texttt{Dhan-Shomadhan}, as the brief's path
+\texttt{.\textbackslash Dhan-Shomadhan\textbackslash} assumes), run:
+\begin{verbatim}
+python group24.py all
+\end{verbatim}
+\end{enumerate}
+
+\noindent This runs six stages in order and prints progress; on a 16~GB
+M-series MacBook it takes about 5 minutes. Each stage can also be run alone,
+in this order, e.g.\ \texttt{python group24.py evaluate}. Later stages reuse
+what earlier stages saved.
+
+\begin{center}
+\small
+\begin{tabular}{|l|p{6.2cm}|p{5.2cm}|}
+\hline
+\textbf{Stage} & \textbf{What it does} & \textbf{Main output} \\ \hline
+\texttt{inspect} & Checks labels, counts images, image statistics (Section 3) & \texttt{dataset-notes/} \\ \hline
+\texttt{splits} & Makes the 5 seeded 80/20 train/test splits & \texttt{Dhan-Shomadhan/\_interim/} \\ \hline
+\texttt{baseline} & Colour histogram and HOG features & \texttt{Dhan-Shomadhan/\_interim/} \\ \hline
+\texttt{resnet} & ResNet-18 features (downloads weights on first use) & \texttt{Dhan-Shomadhan/\_interim/} \\ \hline
+\texttt{evaluate} & Tunes and trains the SVMs, tests all splits and scenarios & \texttt{results/}, \texttt{results/logs/} \\ \hline
+\texttt{plots} & Figures 1, 3 and 4 & \texttt{results/figures/} \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\small
+\begin{tabular}{|p{5.6cm}|p{8.2cm}|}
+\hline
+\textbf{Report item} & \textbf{File} \\ \hline
+Table 2 (mean $\pm$ std) and per-class recall & end of \texttt{results/logs/}\newline\texttt{05\_train\_evaluate\_log.txt} \\ \hline
+Scores per split; per class & \texttt{results/summary.csv};\newline\texttt{results/per\_class.csv} \\ \hline
+Confusion matrices; every test prediction & \texttt{results/confusion\_*.csv};\newline\texttt{results/predictions.csv} \\ \hline
+Chosen SVM settings (Section 6.1) & \texttt{results/best\_params.csv} \\ \hline
+Dataset statistics (Section 3) & \texttt{dataset-notes/} \\ \hline
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Reproducibility.} The splits use fixed seeds (0 to 4) and a
+sorted file list, so they are identical on every computer. Deep features
+computed on a different device (CPU instead of a GPU) may differ in the last
+decimal places.
+
+\noindent\textbf{Common problems.}
+\begin{itemize}
+\item \texttt{python3.12} or \texttt{py} not found: reopen the terminal after installing Python.
+\item ``Dataset folder not found'': run from the folder that contains
+\texttt{Dhan-Shomadhan}; check the unzip did not create a nested
+\texttt{Dhan-Shomadhan/Dhan-Shomadhan/}.
+\item ``No module named \ldots'': the environment is not active; repeat step 5.
+\item Weight download fails: check the internet connection, or place the weights file manually (part a).
+\end{itemize}
